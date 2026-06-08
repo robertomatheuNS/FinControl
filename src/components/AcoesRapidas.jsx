@@ -57,25 +57,6 @@ export default function AcoesRapidas({ onSaveReceita, onSaveDespesa }) {
         </div>
       </div>
 
-      <div
-        className="card border rounded-3 p-3 quick-action-card"
-        style={{ cursor: "pointer" }}
-      >
-        <div className="d-flex align-items-center gap-3">
-          <div
-            className="bg-info bg-opacity-10 text-info rounded-3 d-flex align-items-center justify-content-center"
-            style={{ width: "48px", height: "48px" }}
-          >
-            <i className="bi bi-file-earmark-text fs-5"></i>
-          </div>
-
-          <div>
-            <h6 className="fw-bold mb-0 text-dark">Ver Relatórios</h6>
-            <small className="text-muted">Análise completa das finanças</small>
-          </div>
-        </div>
-      </div>
-
       <ModalReceita
         show={showModalReceita}
         handleClose={handleCloseModalReceita}
