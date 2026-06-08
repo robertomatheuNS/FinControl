@@ -37,13 +37,17 @@ export default function Metas() {
           </p>
         </div>
 
-        <button className="btn-nova-meta">+ Adicionar Nova Meta</button>
+        <button className="btn-nova-meta">
+          + Adicionar Nova Meta
+        </button>
       </div>
 
       {/* Resumo */}
       <div className="card resumo-card mb-4">
         <div className="card-body p-4">
-          <h3 className="fw-bold mb-4">Resumo Geral das Metas</h3>
+          <h3 className="fw-bold mb-4">
+            Resumo Geral das Metas
+          </h3>
 
           <div className="row">
             <div className="col-md-4">
@@ -51,10 +55,19 @@ export default function Metas() {
                 Total percentual de todas as metas atingido
               </h5>
 
-              <div className="progress my-3" style={{ height: "30px" }}>
+              <div
+                className="progress my-3"
+                style={{ height: "30px" }}
+              >
                 <div
-                  className="progress-bar bg-danger"
-                  style={{ width: "60%" }}
+                  className="progress-bar"
+                  style={{
+                    width: "60%",
+                    background:
+                      "linear-gradient(90deg, #9333ea 0%, #a855f7 50%, #c084fc 100%)",
+                    color: "#fff",
+                    fontWeight: "600",
+                  }}
                 >
                   60%
                 </div>
@@ -65,7 +78,9 @@ export default function Metas() {
             </div>
 
             <div className="col-md-4">
-              <h4 className="fw-bold mb-4">Próximas Conquistas</h4>
+              <h4 className="fw-bold mb-4">
+                Próximas Conquistas
+              </h4>
 
               <p>Viagem Fim de Ano - 80%</p>
               <p>Carro Novo - 60%</p>
@@ -87,12 +102,20 @@ export default function Metas() {
 
       {/* Lista de Metas */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold">Módulos de Metas Individual</h2>
+        <h2 className="fw-bold">
+          Módulos de Metas Individual
+        </h2>
 
         <div className="btn-group">
-          <button className="btn btn-light">Todas</button>
-          <button className="btn btn-outline-secondary">Ativas</button>
-          <button className="btn btn-outline-secondary">Concluídas</button>
+          <button className="btn btn-light">
+            Todas
+          </button>
+          <button className="btn btn-outline-secondary">
+            Ativas
+          </button>
+          <button className="btn btn-outline-secondary">
+            Concluídas
+          </button>
         </div>
       </div>
 
@@ -101,26 +124,41 @@ export default function Metas() {
           <div className="col-md-4 mb-4" key={index}>
             <div className="card meta-card h-100">
               <div className="card-body">
-                <h4 className="fw-bold">{meta.titulo}</h4>
+                <h4 className="fw-bold">
+                  {meta.titulo}
+                </h4>
 
-                <h5 className="text-muted mb-3">({meta.valorMeta})</h5>
+                <h5 className="text-muted mb-3">
+                  ({meta.valorMeta})
+                </h5>
 
-                <div className="progress mb-3" style={{ height: "25px" }}>
+                <div
+                  className="progress mb-3"
+                  style={{ height: "25px" }}
+                >
                   <div
-                    className="progress-bar bg-danger"
+                    className="progress-bar"
                     style={{
                       width: `${meta.progresso}%`,
+                      background:
+                        "linear-gradient(90deg, #9333ea 0%, #a855f7 50%, #c084fc 100%)",
+                      color: "#fff",
+                      fontWeight: "600",
                     }}
                   >
                     {meta.progresso}%
                   </div>
                 </div>
 
-                <p className="fw-bold">Acumulado: {meta.acumulado}</p>
+                <p className="fw-bold">
+                  Acumulado: {meta.acumulado}
+                </p>
 
                 <p>Prazo: {meta.prazo}</p>
 
-                <button className="btn-meta w-100">Ver Detalhes</button>
+                <button className="btn-meta w-100">
+                  Ver Detalhes
+                </button>
               </div>
             </div>
           </div>
@@ -130,8 +168,8 @@ export default function Metas() {
       {/* Dica */}
       <div className="text-center dica-meta">
         <p className="fw-semibold">
-          Dica: Crie uma meta secundária para lazer e viagens para manter o foco
-          nas metas principais.
+          Dica: Crie uma meta secundária para lazer e viagens para
+          manter o foco nas metas principais.
         </p>
       </div>
     </div>
