@@ -13,6 +13,14 @@
       "categoria": "Freelance",
       "formaPagamento": "dinheiro",
       "id": "lB6lv0V9Ajc"
+    },
+    {
+      "descricao": "achei no chão",
+      "valor": "R$ 10,00",
+      "data": "2026-06-01",
+      "categoria": "sorte",
+      "formaPagamento": "dinheiro",
+      "id": "UkY3egtXOYs"
     }
   ],
   "despesas": [
