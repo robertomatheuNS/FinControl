@@ -24,7 +24,7 @@ export default function Receitas() {
                 </div>
 
                 <button
-                    className="btn btn-danger"
+                    className="btn btn-success"
                     onClick={handleOpenModalReceita}
                 >
                     + Nova Receita
