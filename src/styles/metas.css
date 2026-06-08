@@ -1,0 +1,55 @@
+.proximas-conquistas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.proxima-conquista-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.95rem 0.85rem;
+  border-radius: 18px;
+  background: #f8f9ff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.04);
+}
+
+.proxima-conquista-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  display: inline-block;
+}
+
+.proximas-chart-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  margin-top: 10px;
+}
+
+.chart-center-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 140px;
+  min-height: 80px;
+  padding: 0.9rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 24px 40px rgba(15, 23, 42, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 0.95rem;
+  line-height: 1.2;
+}
+
+@media (max-width: 992px) {
+  .proximas-chart-wrapper {
+    max-width: 100%;
+  }
+}

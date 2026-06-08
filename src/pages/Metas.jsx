@@ -1,4 +1,5 @@
 import React from "react";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import "../styles/metas.css";
 
 export default function Metas() {
@@ -26,6 +27,33 @@ export default function Metas() {
     },
   ];
 
+  const proximasConquistas = [
+    {
+      titulo: "Viagem Fim de Ano",
+      progresso: 80,
+      cor: "#ef4444",
+      valorMeta: "R$ 10.000",
+    },
+    {
+      titulo: "Carro Novo",
+      progresso: 60,
+      cor: "#2563eb",
+      valorMeta: "R$ 50.000",
+    },
+    {
+      titulo: "Reserva de Emergência",
+      progresso: 30,
+      cor: "#f59e0b",
+      valorMeta: "R$ 10.000",
+    },
+  ];
+
+  const chartData = proximasConquistas.map((item) => ({
+    name: item.titulo,
+    value: item.progresso,
+    fill: item.cor,
+  }));
+
   return (
     <div className="container-fluid py-4">
       {/* Cabeçalho */}
@@ -37,17 +65,13 @@ export default function Metas() {
           </p>
         </div>
 
-        <button className="btn-nova-meta">
-          + Adicionar Nova Meta
-        </button>
+        <button className="btn-nova-meta">+ Adicionar Nova Meta</button>
       </div>
 
       {/* Resumo */}
       <div className="card resumo-card mb-4">
         <div className="card-body p-4">
-          <h3 className="fw-bold mb-4">
-            Resumo Geral das Metas
-          </h3>
+          <h3 className="fw-bold mb-4">Resumo Geral das Metas</h3>
 
           <div className="row">
             <div className="col-md-4">
@@ -55,10 +79,7 @@ export default function Metas() {
                 Total percentual de todas as metas atingido
               </h5>
 
-              <div
-                className="progress my-3"
-                style={{ height: "30px" }}
-              >
+              <div className="progress my-3" style={{ height: "30px" }}>
                 <div
                   className="progress-bar"
                   style={{
@@ -78,23 +99,62 @@ export default function Metas() {
             </div>
 
             <div className="col-md-4">
-              <h4 className="fw-bold mb-4">
-                Próximas Conquistas
-              </h4>
+              <h4 className="fw-bold mb-4">Próximas Conquistas</h4>
 
-              <p>Viagem Fim de Ano - 80%</p>
-              <p>Carro Novo - 60%</p>
-              <p>Reserva de Emergência - 30%</p>
+              <div className="proximas-conquistas-list">
+                {proximasConquistas.map((item) => (
+                  <div
+                    key={item.titulo}
+                    className="proxima-conquista-item"
+                  >
+                    <div className="d-flex align-items-center gap-3">
+                      <span
+                        className="proxima-conquista-dot"
+                        style={{ backgroundColor: item.cor }}
+                      />
+                      <div>
+                        <p className="mb-1 fw-semibold">{item.titulo}</p>
+                        <p
+                          className="text-muted mb-0"
+                          style={{ fontSize: "14px" }}
+                        >
+                          {item.valorMeta}
+                        </p>
+                      </div>
+                    </div>
+
+                    <span className="fw-bold">{item.progresso}%</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div className="col-md-4 text-center">
-              <div
-                className="meta-circle"
-                style={{
-                  width: "180px",
-                  height: "180px",
-                }}
-              ></div>
+            <div className="col-md-4">
+              <div className="proximas-chart-wrapper mx-auto">
+                <ResponsiveContainer width="100%" height={220}>
+                  <PieChart>
+                    <Pie
+                      data={chartData}
+                      dataKey="value"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={60}
+                      outerRadius={95}
+                      paddingAngle={2}
+                      stroke="none"
+                    >
+                      {chartData.map((entry, index) => (
+                        <Cell key={`cell-${index}`} fill={entry.fill} />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+
+                <div className="chart-center-badge">
+                  Próximas<br />
+                  <span className="fw-bold">Conquistas</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -102,20 +162,12 @@ export default function Metas() {
 
       {/* Lista de Metas */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2 className="fw-bold">
-          Módulos de Metas Individual
-        </h2>
+        <h2 className="fw-bold">Módulos de Metas Individual</h2>
 
         <div className="btn-group">
-          <button className="btn btn-light">
-            Todas
-          </button>
-          <button className="btn btn-outline-secondary">
-            Ativas
-          </button>
-          <button className="btn btn-outline-secondary">
-            Concluídas
-          </button>
+          <button className="btn btn-light">Todas</button>
+          <button className="btn btn-outline-secondary">Ativas</button>
+          <button className="btn btn-outline-secondary">Concluídas</button>
         </div>
       </div>
 
@@ -124,18 +176,11 @@ export default function Metas() {
           <div className="col-md-4 mb-4" key={index}>
             <div className="card meta-card h-100">
               <div className="card-body">
-                <h4 className="fw-bold">
-                  {meta.titulo}
-                </h4>
+                <h4 className="fw-bold">{meta.titulo}</h4>
 
-                <h5 className="text-muted mb-3">
-                  ({meta.valorMeta})
-                </h5>
+                <h5 className="text-muted mb-3">({meta.valorMeta})</h5>
 
-                <div
-                  className="progress mb-3"
-                  style={{ height: "25px" }}
-                >
+                <div className="progress mb-3" style={{ height: "25px" }}>
                   <div
                     className="progress-bar"
                     style={{
@@ -150,15 +195,11 @@ export default function Metas() {
                   </div>
                 </div>
 
-                <p className="fw-bold">
-                  Acumulado: {meta.acumulado}
-                </p>
+                <p className="fw-bold">Acumulado: {meta.acumulado}</p>
 
                 <p>Prazo: {meta.prazo}</p>
 
-                <button className="btn-meta w-100">
-                  Ver Detalhes
-                </button>
+                <button className="btn-meta w-100">Ver Detalhes</button>
               </div>
             </div>
           </div>
@@ -168,8 +209,8 @@ export default function Metas() {
       {/* Dica */}
       <div className="text-center dica-meta">
         <p className="fw-semibold">
-          Dica: Crie uma meta secundária para lazer e viagens para
-          manter o foco nas metas principais.
+          Dica: Crie uma meta secundária para lazer e viagens para manter o foco
+          nas metas principais.
         </p>
       </div>
     </div>
