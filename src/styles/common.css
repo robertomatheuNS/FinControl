@@ -1,0 +1,43 @@
+/* Common/shared styles for the app (tables, progress defaults, small helpers) */
+
+.recharts-wrapper *:focus,
+.recharts-surface:focus,
+g:focus,
+path:focus {
+  outline: none !important;
+}
+
+/* Tables used across pages */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+th, td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #007f5f;
+  color: white;
+}
+
+.origem,
+.origem-badge {
+  background-color: #00b37e;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 12px;
+}
+
+/* Progress bar neutral defaults */
+.progress-bar-neutral {
+  background-color: #e9ecef;
+  border-radius: 10px;
+  overflow: hidden;
+}

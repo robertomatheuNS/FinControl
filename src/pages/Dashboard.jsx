@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../App.css";
+import "../styles/dashboard.css";
 import GraficoDespesas from "../components/GraficoDespesas";
 import AcoesRapidas from "../components/AcoesRapidas";
 import UltimasTransacoes from "../components/UltimasTransacoes";

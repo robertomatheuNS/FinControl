@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import ModalDespesa from "../components/ModalDespesa";
 import { listarDespesas } from "../controllers/despesaController";
 import { converterMoedaParaNumero } from "../controllers/dashboardController";
+import "../styles/despesas.css";
 
 export default function Despesas() {
   const [despesas, setDespesas] = useState([]);

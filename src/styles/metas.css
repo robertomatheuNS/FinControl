@@ -53,3 +53,122 @@
     max-width: 100%;
   }
 }
+
+/* MIGRATED FROM App.css - Metas page specific styles */
+
+/* Título */
+.metas-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+/* Botão Nova Meta */
+.btn-nova-meta {
+  background-color: #a855f7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 24px;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.btn-nova-meta:hover {
+  background-color: #a855f7;
+}
+
+/* Card Resumo */
+.resumo-card {
+  border-radius: 18px;
+  border: none;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.resumo-card .card-body {
+  padding: 30px;
+}
+
+/* Barra de progresso */
+.progress {
+  height: 28px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #edf2f7;
+  display: flex; /* garante comportamento correto */
+}
+
+.progress-bar {
+  background: #a855f7;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Cards individuais */
+.meta-card {
+  border: none;
+  border-radius: 18px;
+  transition: 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+}
+
+.meta-card:hover {
+  transform: translateY(-4px);
+}
+
+.meta-card .card-body {
+  padding: 24px;
+}
+
+/* Botão detalhes */
+.btn-detalhes {
+  width: 100%;
+  background-color: #a855f7;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 600;
+}
+
+.btn-detalhes:hover {
+  background-color: #a855f7;
+}
+
+/* Filtros */
+.visualizacao-btn {
+  border-radius: 10px;
+  padding: 8px 16px;
+}
+
+/* Círculo do gráfico */
+.grafico-placeholder {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 18px solid #a855f7;
+  margin: auto;
+}
+
+/* Texto da dica */
+.dica-metas {
+  margin-top: 30px;
+  text-align: center;
+  font-weight: 500;
+  color: #444;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .metas-title {
+    font-size: 1.8rem;
+  }
+
+  .grafico-placeholder {
+    width: 140px;
+    height: 140px;
+  }
+}

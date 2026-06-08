@@ -1,0 +1,17 @@
+/* Styles specific to the Despesas page */
+
+.despesas-page .card.border-0 {
+  border-radius: 16px;
+}
+
+.despesas-valor-destaque {
+  color: #d94a4a;
+  font-weight: 700;
+}
+
+/* Small responsive tweaks */
+@media (max-width: 768px) {
+  .despesas-page .card.border-0 {
+    padding: 12px;
+  }
+}
