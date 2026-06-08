@@ -5,7 +5,7 @@ export default function ModalMeta({ show, handleClose, onSave }) {
   const [titulo, setTitulo] = useState("");
   const [valorMeta, setValorMeta] = useState("");
   const [acumulado, setAcumulado] = useState("");
-  const [prazo, setPrazo] = useState("");
+  const [prazo, setPrazo] = useState(""); // Agora receberá o formato YYYY-MM-DD
   const [cor, setCor] = useState("#2563eb");
   const [loading, setLoading] = useState(false);
 
@@ -120,8 +120,9 @@ export default function ModalMeta({ show, handleClose, onSave }) {
                 onChange={(e) => setAcumulado(e.target.value)}
               />
 
+              {/* Formato de data alterado para dia/mês/ano completo igual ao de receitas */}
               <input
-                type="month"
+                type="date"
                 className="form-control mb-3"
                 value={prazo}
                 onChange={(e) => setPrazo(e.target.value)}
