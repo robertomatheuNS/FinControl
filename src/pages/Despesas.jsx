@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalDespesa from "../components/ModalDespesa"; 
+import { listarDespesas } from "../controllers/despesaController";
 
 export default function Despesas() {
 
@@ -7,40 +8,20 @@ export default function Despesas() {
   const handleOpenModalDespesa = () => setShowModalDespesa(true);
   const handleCloseModalDespesa = () => setShowModalDespesa(false);
 
-  const despesas = [
-    {
-      id: 1,
-      data: "05/06/2024",
-      descricao: "Aluguel",
-      categoria: "Moradia",
-      pagamento: "Transferência",
-      valor: 1500,
-    },
-    {
-      id: 2,
-      data: "03/06/2024",
-      descricao: "Supermercado",
-      categoria: "Alimentação",
-      pagamento: "Pix",
-      valor: 850,
-    },
-    {
-      id: 3,
-      data: "01/06/2024",
-      descricao: "Conta de Energia",
-      categoria: "Contas",
-      pagamento: "Débito",
-      valor: 320,
-    },
-    {
-      id: 4,
-      data: "28/05/2024",
-      descricao: "Internet",
-      categoria: "Serviços",
-      pagamento: "Pix",
-      valor: 420,
-    },
-  ];
+  const [despesas, setDespesas] = useState([]);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const data = await listarDespesas();
+        setDespesas(data);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   const totalDespesas = despesas.reduce(
     (total, despesa) => total + despesa.valor,
@@ -164,7 +145,7 @@ export default function Despesas() {
                   </td>
 
                   <td className="p-4">
-                    {despesa.pagamento}
+                    {despesa.formapagamento}
                   </td>
 
                   <td
