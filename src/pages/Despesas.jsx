@@ -3,98 +3,107 @@ import React from "react";
 export default function Despesas() {
   const despesas = [
     {
+      id: 1,
+      data: "05/06/2024",
+      descricao: "Aluguel",
+      categoria: "Moradia",
+      pagamento: "Transferência",
+      valor: 1500,
+    },
+    {
+      id: 2,
       data: "03/06/2024",
-      descricao: "Transporte (Uber)",
-      categoria: "Transporte",
-      categoriaClass: "bg-primary-subtle text-primary",
-      pagamento: "Pix",
-      valor: "25,00",
-      icone: "🚕",
-    },
-    {
-      data: "02/06/2024",
-      descricao: "Conta de luz",
-      categoria: "Contas",
-      categoriaClass: "bg-warning-subtle text-warning",
-      pagamento: "Débito Automático",
-      valor: "200,00",
-      icone: "🏠",
-    },
-    {
-      data: "01/06/2024",
-      descricao: "Alimentação",
+      descricao: "Supermercado",
       categoria: "Alimentação",
-      categoriaClass: "bg-danger-subtle text-danger",
-      pagamento: "Cartão de Débito",
-      valor: "120,00",
-      icone: "🍴",
+      pagamento: "Pix",
+      valor: 850,
     },
     {
-      data: "31/05/2024",
-      descricao: "Lazer",
-      categoria: "Lazer",
-      categoriaClass: "bg-info-subtle text-info",
+      id: 3,
+      data: "01/06/2024",
+      descricao: "Conta de Energia",
+      categoria: "Contas",
+      pagamento: "Débito",
+      valor: 320,
+    },
+    {
+      id: 4,
+      data: "28/05/2024",
+      descricao: "Internet",
+      categoria: "Serviços",
       pagamento: "Pix",
-      valor: "100,00",
-      icone: "🎮",
+      valor: 420,
     },
   ];
 
+  const totalDespesas = despesas.reduce(
+    (total, despesa) => total + despesa.valor,
+    0
+  );
+
   return (
-    <div className="container-fluid py-3">
+    <div className="container-fluid py-4">
       {/* Cabeçalho */}
-      <div className="d-flex justify-content-between align-items-start mb-4">
+      <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
-          <h1 className="fw-bold mb-2">Despesas</h1>
-          <p className="text-muted">Acompanhe todas as saídas</p>
+          <h1 className="fw-bold">Despesas</h1>
+          <p className="text-muted">
+            Acompanhe todas as saídas financeiras
+          </p>
         </div>
 
         <button
           className="btn text-white px-4 py-2"
           style={{
-            backgroundColor: "#6f42c1",
+            backgroundColor: "#d94a4a",
             borderRadius: "10px",
-            fontWeight: "600",
-            minWidth: "180px",
+            border: "none",
           }}
         >
           + Nova Despesa
         </button>
       </div>
 
-      {/* Card Total */}
+      {/* Card principal */}
       <div
         className="card border-0 mb-4"
         style={{
-          backgroundColor: "#fff5f5",
-          borderRadius: "15px",
+          backgroundColor: "#fdf4f4",
+          borderRadius: "16px",
         }}
       >
-        <div className="card-body p-4">
-          <div className="d-flex align-items-center">
-            <div
-              className="d-flex justify-content-center align-items-center me-4"
-              style={{
-                width: "80px",
-                height: "80px",
-                backgroundColor: "#6f42c1",
-                borderRadius: "50%",
-                color: "white",
-                fontSize: "32px",
-              }}
+        <div className="card-body p-4 d-flex align-items-center">
+          <div
+            className="d-flex justify-content-center align-items-center me-4"
+            style={{
+              width: "80px",
+              height: "80px",
+              backgroundColor: "#d94a4a",
+              borderRadius: "50%",
+              color: "white",
+              fontSize: "32px",
+              fontWeight: "bold",
+            }}
+          >
+            ↓
+          </div>
+
+          <div>
+            <h5 className="mb-2">Total de despesas</h5>
+
+            <h1
+              className="fw-bold"
+              style={{ color: "#d94a4a" }}
             >
-              ↘
-            </div>
+              R${" "}
+              {totalDespesas.toLocaleString("pt-BR", {
+                minimumFractionDigits: 2,
+              })}
+            </h1>
 
-            <div>
-              <h5 className="mb-1">Total de despesas</h5>
-
-              <h1 className="fw-bold mb-1" style={{ color: "#6f42c1" }}>
-                R$ 1.500,00
-              </h1>
-
-              <p className="text-muted mb-0">Este mês</p>
-            </div>
+            <p className="text-muted mb-0">
+              Este mês
+            </p>
           </div>
         </div>
       </div>
@@ -102,7 +111,7 @@ export default function Despesas() {
       {/* Filtros */}
       <div className="row mb-4">
         <div className="col-md-3">
-          <select className="form-select" style={{ height: "55px" }}>
+          <select className="form-select">
             <option>Este mês</option>
             <option>Últimos 3 meses</option>
             <option>Este ano</option>
@@ -114,20 +123,14 @@ export default function Despesas() {
             type="text"
             className="form-control"
             placeholder="Buscar despesa..."
-            style={{ height: "55px" }}
           />
         </div>
       </div>
 
       {/* Tabela */}
-      <div
-        className="card border-0 shadow-sm"
-        style={{
-          borderRadius: "15px",
-        }}
-      >
+      <div className="card border-0 shadow-sm">
         <div className="card-body p-0">
-          <table className="table align-middle mb-0">
+          <table className="table mb-0">
             <thead>
               <tr>
                 <th className="p-4">Data</th>
@@ -135,61 +138,36 @@ export default function Despesas() {
                 <th className="p-4">Categoria</th>
                 <th className="p-4">Forma de Pagamento</th>
                 <th className="p-4 text-end">Valor</th>
-                <th></th>
               </tr>
             </thead>
 
             <tbody>
-              {despesas.map((item, index) => (
-                <tr key={index}>
-                  <td className="p-4">
-                    <div className="d-flex align-items-center gap-3">
-                      <div
-                        className="d-flex justify-content-center align-items-center"
-                        style={{
-                          width: "45px",
-                          height: "45px",
-                          borderRadius: "50%",
-                          backgroundColor: "#d94b4b",
-                          color: "white",
-                        }}
-                      >
-                        {item.icone}
-                      </div>
+              {despesas.map((despesa) => (
+                <tr key={despesa.id}>
+                  <td className="p-4">{despesa.data}</td>
 
-                      {item.data}
-                    </div>
+                  <td className="p-4">
+                    {despesa.descricao}
                   </td>
 
-                  <td className="p-4">{item.descricao}</td>
-
                   <td className="p-4">
-                    <span
-                      className={`badge rounded-pill px-3 py-2 ${item.categoriaClass}`}
-                    >
-                      {item.categoria}
+                    <span className="badge bg-danger">
+                      {despesa.categoria}
                     </span>
                   </td>
 
-                  <td className="p-4">{item.pagamento}</td>
-
-                  <td
-                    className="p-4 text-end fw-bold"
-                    style={{
-                      color: "#6f42c1",
-                    }}
-                  >
-                    - R$ {item.valor}
+                  <td className="p-4">
+                    {despesa.pagamento}
                   </td>
 
                   <td
-                    className="text-center"
-                    style={{
-                      fontSize: "24px",
-                      color: "#999",
-                    }}
+                    className="p-4 text-end fw-bold"
+                    style={{ color: "#d94a4a" }}
                   >
-                    ›
+                    - R${" "}
+                    {despesa.valor.toLocaleString("pt-BR", {
+                      minimumFractionDigits: 2,
+                    })}
                   </td>
                 </tr>
               ))}
@@ -198,11 +176,10 @@ export default function Despesas() {
         </div>
       </div>
 
-      {/* Dica */}
-      <div className="text-center mt-5">
+      {/* Rodapé */}
+      <div className="text-center mt-4">
         <p>
-          <strong>Dica:</strong> acompanhe seus gastos por categoria e
-          identifique onde pode economizar.
+          <strong>Dica:</strong> acompanhe seus gastos para identificar oportunidades de economia e melhorar seu planejamento financeiro.
         </p>
       </div>
     </div>
