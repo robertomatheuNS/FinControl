@@ -2,7 +2,7 @@ import Gerencie from "../assets/Gerencie.png";
 import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
-  // Troquei os componentes do Lucide pelos nomes das classes do Bootstrap Icons
+  
   const menu = [
     { label: "Dashboard", icon: "bi-grid", path: "/" },
     { label: "Receitas", icon: "bi-graph-up-arrow", path: "/receitas" },
@@ -54,7 +54,6 @@ export default function Sidebar() {
           </ul>
         </nav>
 
-        {/* Card extra que estava no Figma */}
         <div className="p-3 mx-2 mb-3 bg-success bg-opacity-25 rounded text-center">
           <i className="bi bi-wallet2 fs-3 text-success mb-2 d-block"></i>
           <small className="text-white">

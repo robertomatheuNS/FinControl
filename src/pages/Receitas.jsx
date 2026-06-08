@@ -36,7 +36,7 @@ export default function Receitas() {
     handleCloseModalReceita();
   };
 
-  // resumo dinâmico
+  
   const converterMoedaParaNumero = (valor) => {
     if (!valor) return 0;
     return Number(

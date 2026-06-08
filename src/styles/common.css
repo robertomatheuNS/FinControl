@@ -1,4 +1,4 @@
-/* Common/shared styles for the app (tables, progress defaults, small helpers) */
+
 
 .recharts-wrapper *:focus,
 .recharts-surface:focus,
@@ -7,7 +7,7 @@ path:focus {
   outline: none !important;
 }
 
-/* Tables used across pages */
+
 table {
   width: 100%;
   border-collapse: collapse;
@@ -35,7 +35,7 @@ th {
   font-size: 12px;
 }
 
-/* Progress bar neutral defaults */
+
 .progress-bar-neutral {
   background-color: #e9ecef;
   border-radius: 10px;

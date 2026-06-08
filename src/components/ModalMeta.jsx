@@ -32,10 +32,10 @@ export default function ModalMeta({ show, handleClose, onSave }) {
         cor,
       };
 
-      // envia para API JSON Server
+      
       await criarMeta(novaMeta);
 
-      // opcional: atualizar estado global/local
+      
       if (onSave) await onSave(novaMeta);
 
       reset();
@@ -71,13 +71,13 @@ export default function ModalMeta({ show, handleClose, onSave }) {
       >
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
-            {/* HEADER */}
+            {}
             <div className="modal-header">
               <h5 className="modal-title">Nova Meta</h5>
               <button className="btn-close" onClick={handleClose} />
             </div>
 
-            {/* BODY */}
+            {}
             <div className="modal-body">
               <input
                 type="text"
@@ -117,7 +117,7 @@ export default function ModalMeta({ show, handleClose, onSave }) {
               </div>
             </div>
 
-            {/* FOOTER */}
+            {}
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={handleClose}>
                 Cancelar

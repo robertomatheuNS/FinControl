@@ -34,15 +34,7 @@ export async function criarMeta(meta) {
   return response.json();
 }
 
-export async function deletarMeta(id) {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
 
-  if (!response.ok) {
-    throw new Error("Erro ao deletar meta");
-  }
-}
 
 export async function atualizarMeta(id, dadosAtualizados) {
   const response = await fetch(`${API_URL}/${id}`, {

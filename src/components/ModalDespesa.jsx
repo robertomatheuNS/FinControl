@@ -12,7 +12,7 @@ export default function ModalDespesa({
   const [valorD, setValorD] = useState("");
   const [data, setData] = useState("");
 
-  // 🔥 novos estados
+  
   const [categoria, setCategoria] = useState("");
   const [novaCategoria, setNovaCategoria] = useState("");
   const [mostrarNovaCategoria, setMostrarNovaCategoria] = useState(false);
@@ -21,7 +21,7 @@ export default function ModalDespesa({
 
   const [loading, setLoading] = useState(false);
 
-  // categorias iniciais
+  
   const [categorias, setCategorias] = useState([
     "Alimentação",
     "Transporte",
@@ -98,7 +98,7 @@ export default function ModalDespesa({
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
 
-            {/* HEADER */}
+            {}
             <div className="modal-header">
               <div className="d-flex align-items-center gap-3">
                 <div className="bg-danger bg-opacity-10 text-danger p-2 rounded">
@@ -121,10 +121,10 @@ export default function ModalDespesa({
               />
             </div>
 
-            {/* BODY */}
+            {}
             <div className="modal-body">
 
-              {/* descrição */}
+              {}
               <input
                 type="text"
                 className="form-control mb-3"
@@ -135,14 +135,14 @@ export default function ModalDespesa({
                 }
               />
 
-              {/* valor */}
+              {}
               <InputMoeda
                 value={valorD}
                 onChange={setValorD}
                 className="mb-3"
               />
 
-              {/* data */}
+              {}
               <input
                 type="date"
                 className="form-control mb-3"
@@ -152,7 +152,7 @@ export default function ModalDespesa({
                 }
               />
 
-              {/* categoria */}
+              {}
               <select
                 className="form-control mb-2"
                 value={categoria}
@@ -173,7 +173,7 @@ export default function ModalDespesa({
                 </option>
               </select>
 
-              {/* criar nova categoria */}
+              {}
               {mostrarNovaCategoria && (
                 <div className="d-flex gap-2 mb-3">
                   <input
@@ -195,7 +195,7 @@ export default function ModalDespesa({
                 </div>
               )}
 
-              {/* forma de pagamento */}
+              {}
               <select
                 className="form-control"
                 value={formaPagamento}
@@ -214,7 +214,7 @@ export default function ModalDespesa({
 
             </div>
 
-            {/* FOOTER */}
+            {}
             <div className="modal-footer">
               <button
                 className="btn btn-secondary"

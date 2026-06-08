@@ -47,7 +47,7 @@ export default function Metas() {
     await carregarMetas();
   };
 
-  // Funções auxiliares para resumo geral
+  
   const converterMoedaParaNumero = (valor) => {
     if (!valor) return 0;
     return Number(
@@ -87,7 +87,7 @@ export default function Metas() {
 
   return (
     <div className="container-fluid py-4">
-      {/* CABEÇALHO */}
+      {}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h1 className="fw-bold">Metas Financeiras</h1>
@@ -106,11 +106,11 @@ export default function Metas() {
         </div>
       </div>
 
-      {/* RESUMO DINÂMICO */}
+      {}
       <div className="card resumo-card mb-4">
         <div className="card-body p-4">
           <div className="row gy-4 align-items-start">
-            {/* ESQUERDA */}
+            {}
             <div className="col-md-4">
               <h4 className="fw-bold mb-4">Resumo Geral das Metas</h4>
               <h5 className="fw-bold">
@@ -133,7 +133,6 @@ export default function Metas() {
               <h5>Total Acumulado: {formatarMoeda(totalAcumulado)}</h5>
               <h5>Meta Total: {formatarMoeda(metaTotal)}</h5>
             </div>
-                        {/* MEIO - Próximas Conquistas */}
             <div className="col-md-4 text-center">
               <h4 className="fw-bold mb-4">Próximas Conquistas</h4>
               <div className="proximas-conquistas-list">
@@ -160,7 +159,6 @@ export default function Metas() {
               </div>
             </div>
 
-            {/* DIREITA - Gráfico */}
             <div className="col-md-4 text-center">
               <div className="proximas-chart-wrapper mx-auto">
                 <ResponsiveContainer width="100%" height={220}>
@@ -192,7 +190,6 @@ export default function Metas() {
         </div>
       </div>
 
-      {/* LISTA DE METAS (Módulos Individuais) */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold">Módulos de Metas Individual</h2>
         <div className="btn-group">
@@ -232,14 +229,12 @@ export default function Metas() {
         ))}
       </div>
 
-      {/* DICA */}
       <div className="text-center dica-meta">
         <p className="fw-semibold">
           Dica: Crie uma meta secundária para lazer e viagens para manter o foco nas metas principais.
         </p>
       </div>
 
-      {/* MODAIS */}
       <ModalMeta
         show={showModalMeta}
         handleClose={handleCloseModalMeta}

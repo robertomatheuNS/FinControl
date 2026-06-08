@@ -48,7 +48,7 @@ export default function Dashboard() {
   const saldoAtual = calcularSaldoAtual(receitas, despesas);
 
   return (
-    // Container com padding ajustado para não comprimir o conteúdo
+    
     <div
       className="container-fluid pb-2"
       style={{

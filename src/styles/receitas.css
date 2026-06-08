@@ -59,7 +59,7 @@
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* stronger lift animation for resumo and principais fontes */
+
 .resumo-card {
   transition: transform 0.28s cubic-bezier(.22,.9,.32,1), box-shadow 0.28s ease, filter 0.28s ease;
 }
@@ -133,7 +133,7 @@
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* Apply lift effect to all cards and items inside Receitas page */
+
 .receitas-page .card,
 .receitas-page .resumo-card,
 .receitas-page .fontes-renda-card,
@@ -151,4 +151,4 @@
   box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
 }
 
-/* progress / table styles moved to common.css */
+

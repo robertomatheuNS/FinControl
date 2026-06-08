@@ -47,10 +47,10 @@ export default function MetasFinanceiras() {
             key={meta.id}
             className="card border rounded-4 p-3 mb-2 shadow-sm"
           >
-            {/* HEADER */}
+            {}
             <div className="d-flex justify-content-between align-items-center mb-2">
 
-              {/* TEXTO */}
+              {}
               <div>
                 <h6
                   className="fw-bold mb-1 text-dark"
@@ -67,7 +67,7 @@ export default function MetasFinanceiras() {
                 </small>
               </div>
 
-              {/* % PROGRESSO */}
+              {}
               <span
                 className="fw-bold"
                 style={{
@@ -79,7 +79,7 @@ export default function MetasFinanceiras() {
               </span>
             </div>
 
-            {/* PROGRESS BAR */}
+            {}
             <div
               className="progress mb-1"
               style={{
@@ -98,7 +98,6 @@ export default function MetasFinanceiras() {
               />
             </div>
 
-            {/* VALORES */}
             <span
               className="fw-bold text-dark"
               style={{ fontSize: "12px" }}

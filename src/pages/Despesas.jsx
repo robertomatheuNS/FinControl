@@ -39,7 +39,7 @@ export default function Despesas() {
 
   return (
     <div className="container-fluid py-4">
-      {/* Cabeçalho */}
+      {}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h1 className="fw-bold">Despesas</h1>
@@ -61,7 +61,7 @@ export default function Despesas() {
         </button>
       </div>
 
-      {/* Card principal */}
+      {}
       <div
         className="card border-0 mb-4"
         style={{
@@ -105,7 +105,7 @@ export default function Despesas() {
         </div>
       </div>
 
-      {/* Filtros */}
+      {}
       <div className="row mb-4">
         <div className="col-md-3">
           <select className="form-select">
@@ -124,7 +124,7 @@ export default function Despesas() {
         </div>
       </div>
 
-      {/* Tabela */}
+      {}
       <div className="card border-0 shadow-sm">
         <div className="card-body p-0">
           <table className="table mb-0">
@@ -173,7 +173,7 @@ export default function Despesas() {
         </div>
       </div>
 
-      {/* Rodapé */}
+      {}
       <div className="text-center mt-4">
         <p>
           <strong>Dica:</strong> acompanhe seus gastos para identificar oportunidades de economia e melhorar seu planejamento financeiro.

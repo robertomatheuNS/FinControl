@@ -54,16 +54,16 @@
   }
 }
 
-/* MIGRATED FROM App.css - Metas page specific styles */
 
-/* Título */
+
+
 .metas-title {
   font-size: 2.2rem;
   font-weight: 700;
   color: #1f2937;
 }
 
-/* Botão Nova Meta */
+
 .btn-nova-meta {
   background-color: #a855f7;
   color: white;
@@ -78,7 +78,7 @@
   background-color: #a855f7;
 }
 
-/* Card Resumo */
+
 .resumo-card {
   border-radius: 18px;
   border: none;
@@ -89,13 +89,13 @@
   padding: 30px;
 }
 
-/* Barra de progresso */
+
 .progress {
   height: 28px;
   border-radius: 20px;
   overflow: hidden;
   background-color: #edf2f7;
-  display: flex; /* garante comportamento correto */
+  display: flex; 
 }
 
 .progress-bar {
@@ -107,7 +107,7 @@
   height: 100%;
 }
 
-/* Cards individuais */
+
 .meta-card {
   border: none;
   border-radius: 18px;
@@ -123,7 +123,7 @@
   padding: 24px;
 }
 
-/* Botão detalhes */
+
 .btn-detalhes {
   width: 100%;
   background-color: #a855f7;
@@ -138,13 +138,13 @@
   background-color: #a855f7;
 }
 
-/* Filtros */
+
 .visualizacao-btn {
   border-radius: 10px;
   padding: 8px 16px;
 }
 
-/* Círculo do gráfico */
+
 .grafico-placeholder {
   width: 180px;
   height: 180px;
@@ -153,7 +153,7 @@
   margin: auto;
 }
 
-/* Texto da dica */
+
 .dica-metas {
   margin-top: 30px;
   text-align: center;
@@ -161,7 +161,7 @@
   color: #444;
 }
 
-/* Responsividade */
+
 @media (max-width: 768px) {
   .metas-title {
     font-size: 1.8rem;

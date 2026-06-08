@@ -9,7 +9,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
   const [data, setData] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // NOVOS ESTADOS
+  
   const [categoria, setCategoria] = useState("");
   const [novaCategoria, setNovaCategoria] = useState("");
   const [mostrarNovaCategoria, setMostrarNovaCategoria] = useState(false);
@@ -40,7 +40,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
 
       await criarReceita(novaReceita);
 
-      // limpa campos
+      
       setDescricao("");
       setValorD("");
       setData("");
@@ -48,7 +48,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
       setFormaPagamento("");
       setNovaCategoria("");
 
-      // chama onSave para atualizar lista em Receitas.jsx
+      
       if (onSave) await onSave();
 
       handleClose();
@@ -86,7 +86,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
 
-            {/* HEADER */}
+            {}
             <div className="modal-header">
               <div className="d-flex align-items-center gap-3">
                 <div className="bg-success bg-opacity-10 text-success p-2 rounded">
@@ -104,7 +104,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
               <button className="btn-close" onClick={handleClose} />
             </div>
 
-            {/* BODY */}
+            {}
             <div className="modal-body">
               <input
                 type="text"
@@ -127,7 +127,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
                 onChange={(e) => setData(e.target.value)}
               />
 
-              {/* categoria */}
+              {}
               <select
                 className="form-control mb-2"
                 value={categoria}
@@ -164,7 +164,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
                 </div>
               )}
 
-              {/* forma de pagamento */}
+              {}
               <select
                 className="form-control"
                 value={formaPagamento}
@@ -177,7 +177,7 @@ export default function ModalReceita({ show, handleClose, onSave }) {
               </select>
             </div>
 
-            {/* FOOTER */}
+            {}
             <div className="modal-footer">
               <button className="btn btn-secondary" onClick={handleClose}>
                 Cancelar

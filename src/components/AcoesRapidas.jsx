@@ -37,7 +37,7 @@ export default function AcoesRapidas({ onOpenReceita, onOpenDespesa }) {
             <i className="bi bi-graph-down fs-5"></i>
           </div>
 
-          {/* Textos */}
+          {}
           <div>
             <h6 className="fw-bold mb-0 text-dark">Adicionar Despesa</h6>
             <small className="text-muted">Registrar uma nova saída</small>

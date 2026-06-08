@@ -26,12 +26,3 @@ export async function criarDespesa(despesa) {
   return response.json();
 }
 
-export async function deletarDespesa(id) {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
-
-  if (!response.ok) {
-    throw new Error("Erro ao deletar despesa");
-  }
-}

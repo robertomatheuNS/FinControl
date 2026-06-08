@@ -18,7 +18,7 @@ export default function Header() {
           aria-label="Notificações"
         >
           <i className="bi bi-bell fs-4"></i>
-          {/* Bolinha vermelha de notificação */}
+          {}
           <span className="position-absolute top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle"></span>
         </button>
 

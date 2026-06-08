@@ -25,13 +25,3 @@ export async function criarReceita(receita) {
 
   return response.json();
 }
-
-export async function deletarReceita(id) {
-  const response = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE",
-  });
-
-  if (!response.ok) {
-    throw new Error("Erro ao deletar receita");
-  }
-}
