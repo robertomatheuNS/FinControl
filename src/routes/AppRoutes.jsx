@@ -34,6 +34,7 @@ export default function AppRoutes() {
                         <Route path="/" element={<Dashboard />} />
                         <Route path="/despesas" element={<Despesas />} />
                         <Route path="/metas" element={<Metas />} />
+                        <Route path="/receitas" element={<Receitas />} />
                         <Route path="*" element={<h1>Página não desenvolvida</h1>} />
                     </Routes>
                 </div>
