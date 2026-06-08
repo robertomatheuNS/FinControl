@@ -1,118 +1,82 @@
 import { useEffect, useState } from "react";
-import { listarDespesas } from "../controllers/despesaController";
-import { listarReceitas } from "../controllers/receitaController";
+import { obterMetas } from "../controllers/metasController";
 
-export default function UltimasTransacoes() {
+export default function MetasFinanceiras() {
+  const [metas, setMetas] = useState([]);
 
-  const [transacoes, setTransacoes] = useState([]);
+  const converterMoedaParaNumero = (valor) => {
+    if (!valor) return 0;
+    return Number(
+      String(valor)
+        .replace("R$", "")
+        .replace(/\./g, "")
+        .replace(",", ".")
+        .trim()
+    );
+  };
 
   useEffect(() => {
-    async function carregar() {
-      const receitas = await listarReceitas();
-      const despesas = await listarDespesas();
+    async function carregarMetas() {
+      try {
+        const data = await obterMetas();
 
-      const formatadasReceitas = receitas.map((r) => ({
-        id: r.id,
-        data: r.data,
-        descricao: r.descricao,
-        categoria: r.categoria,
-        tipo: "receita",
-        valor: r.valor,
-      }));
+        const ordenadas = [...data]
+          .sort((a, b) => {
+            return (b.progresso ?? 0) - (a.progresso ?? 0);
+          })
+          .slice(0, 3);
 
-      const formatadasDespesas = despesas.map((d) => ({
-        id: d.id,
-        data: d.data,
-        descricao: d.descricao,
-        categoria: d.categoria,
-        tipo: "despesa",
-        valor: d.valor,
-      }));
-
-      const todas = [...formatadasReceitas, ...formatadasDespesas];
-
-      const ordenadas = todas.sort(
-        (a, b) => new Date(b.data) - new Date(a.data)
-      );
-
-      setTransacoes(ordenadas.slice(0, 5));
+        setMetas(ordenadas);
+      } catch (err) {
+        console.error("Erro ao carregar metas", err);
+      }
     }
-    carregar();
+
+    carregarMetas();
   }, []);
 
   return (
     <div className="d-flex flex-column h-100">
-      <h5 className="fw-bold mb-4">Últimas transações</h5>
+      <h5 className="fw-bold mb-3">Metas financeiras</h5>
 
-      <div className="table-responsive flex-grow-1">
-        <table
-          className="table align-middle text-nowrap"
-          style={{ fontSize: "14px" }}
-        >
-          <thead>
-            <tr>
-              <th
-                className="text-muted border-0 pb-3"
-                style={{ fontWeight: "600" }}
-              >
-                Data
-              </th>
-              <th
-                className="text-muted border-0 pb-3"
-                style={{ fontWeight: "600" }}
-              >
-                Descrição
-              </th>
-              <th
-                className="text-muted border-0 pb-3"
-                style={{ fontWeight: "600" }}
-              >
-                Categoria
-              </th>
-              <th
-                className="text-muted border-0 pb-3"
-                style={{ fontWeight: "600" }}
-              >
-                Tipo
-              </th>
-              <th
-                className="text-muted border-0 pb-3"
-                style={{ fontWeight: "600" }}
-              >
-                Valor
-              </th>
-            </tr>
-          </thead>
+      {metas.map((meta) => {
+        const progresso = meta.progresso ?? 0;
 
-          <tbody>
-            {transacoes.map((t) => (
-              <tr key={t.id}>
-                <td className="py-3 border-bottom border-light">{t.data}</td>
-                <td className="py-3 border-bottom border-light fw-semibold text-dark">
-                  {t.descricao}
-                </td>
-                <td className="py-3 border-bottom border-light">
-                  {t.categoria}
-                </td>
+        return (
+          <div key={meta.id} className="card border rounded-4 p-3 mb-2 shadow-sm">
+            <div className="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <h6 className="fw-bold mb-1 text-dark" style={{ fontSize: "14px" }}>
+                  {meta.titulo}
+                </h6>
 
-                <td className="py-3 border-bottom border-light">
-                  {t.tipo === "receita" ? (
-                    <i className="bi bi-arrow-up text-success fs-5"></i>
-                  ) : (
-                    <i className="bi bi-arrow-down text-danger fs-5"></i>
-                  )}
-                </td>
+                <small className="text-muted" style={{ fontSize: "12px" }}>
+                  Meta: {meta.valorMeta}
+                </small>
+              </div>
 
-                <td
-                  className={`py-3 border-bottom border-light fw-bold ${t.tipo === "receita" ? "text-success" : "text-danger"}`}
-                >
-                  {t.valor}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+              <span className="fw-bold" style={{ color: meta.cor, fontSize: "16px" }}>
+                {progresso}%
+              </span>
+            </div>
+
+            <div className="progress mb-1" style={{ height: "6px", backgroundColor: "#f0f0f0" }}>
+              <div
+                className="progress-bar"
+                style={{
+                  width: `${Math.min(progresso, 100)}%`,
+                  backgroundColor: meta.cor,
+                }}
+              />
+            </div>
+
+            <span className="fw-bold text-dark" style={{ fontSize: "12px" }}>
+              {meta.acumulado}{" "}
+              <span className="text-muted fw-semibold">/ {meta.valorMeta}</span>
+            </span>
+          </div>
+        );
+      })}
     </div>
   );
 }

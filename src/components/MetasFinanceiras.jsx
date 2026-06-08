@@ -4,11 +4,29 @@ import { obterMetas } from "../controllers/metasController";
 export default function MetasFinanceiras() {
   const [metas, setMetas] = useState([]);
 
+  const converterMoedaParaNumero = (valor) => {
+    if (!valor) return 0;
+    return Number(
+      String(valor)
+        .replace("R$", "")
+        .replace(/\./g, "")
+        .replace(",", ".")
+        .trim()
+    );
+  };
+
   useEffect(() => {
     async function carregarMetas() {
       try {
         const data = await obterMetas();
-        setMetas(data);
+
+        const ordenadas = [...data]
+          .sort((a, b) => {
+            return (b.progresso ?? 0) - (a.progresso ?? 0);
+          })
+          .slice(0, 3);
+
+        setMetas(ordenadas);
       } catch (err) {
         console.error("Erro ao carregar metas", err);
       }

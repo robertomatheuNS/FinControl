@@ -180,6 +180,15 @@
       "progresso": 100,
       "prazo": "2026-06-24",
       "cor": "#030811"
+    },
+    {
+      "id": "vzE7j9ENgn0",
+      "titulo": "asdasd",
+      "valorMeta": "R$ 123.123,12",
+      "acumulado": "R$ 131,23",
+      "progresso": 0,
+      "prazo": "2026-06-04",
+      "cor": "#b9acb5"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
