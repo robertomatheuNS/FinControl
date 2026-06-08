@@ -1,46 +1,48 @@
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { converterMoedaParaNumero } from "../controllers/dashboardController";
 
-export default function GraficoDespesas() {
-  // Dados atualizados: Agora temos o 'valorNum' que o gráfico usa para calcular o tamanho da fatia
-  const categorias = [
-    {
-      id: 1,
-      nome: "Alimentação",
-      valorText: "R$ 450,00",
-      valorNum: 450,
-      cor: "#4caf50",
-    }, // Verde
-    {
-      id: 2,
-      nome: "Transporte",
-      valorText: "R$ 375,00",
-      valorNum: 375,
-      cor: "#2196f3",
-    }, // Azul
-    {
-      id: 3,
-      nome: "Contas",
-      valorText: "R$ 300,00",
-      valorNum: 300,
-      cor: "#ffb74d",
-    }, // Laranja
-    {
-      id: 4,
-      nome: "Lazer",
-      valorText: "R$ 225,00",
-      valorNum: 225,
-      cor: "#9c27b0",
-    }, // Roxo
-    {
-      id: 5,
-      nome: "Outros",
-      valorText: "R$ 150,00",
-      valorNum: 150,
-      cor: "#9e9e9e",
-    }, // Cinza
+export default function GraficoDespesas({ despesas = [] }) {
+  const cores = [
+    "#4caf50",
+    "#2196f3",
+    "#ffb74d",
+    "#9c27b0",
+    "#f44336",
+    "#00bcd4",
+    "#ff9800",
+    "#8bc34a",
+    "#673ab7",
+    "#607d8b",
   ];
 
-  // Função para desenhar a porcentagem branca no meio de cada fatia
+  const formatarMoeda = (valor) =>
+    Number(valor).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+  const categoriasMap = despesas.reduce((acc, despesa) => {
+    const nome = despesa.categoria?.trim() || "Sem categoria";
+    const valor = converterMoedaParaNumero(despesa.valor);
+
+    if (!acc[nome]) {
+      acc[nome] = 0;
+    }
+
+    acc[nome] += valor;
+    return acc;
+  }, {});
+
+  const categorias = Object.entries(categoriasMap).map(
+    ([nome, valor], index) => ({
+      id: nome,
+      nome,
+      valorText: formatarMoeda(valor),
+      valorNum: valor,
+      cor: cores[index % cores.length],
+    })
+  );
+
   const renderCustomizedLabel = ({
     cx,
     cy,
@@ -70,11 +72,9 @@ export default function GraficoDespesas() {
 
   return (
     <div className="d-flex flex-column h-100">
-      {/* Título */}
       <h5 className="fw-bold mb-4">Despesas por categoria</h5>
 
       <div className="row flex-grow-1 align-items-center">
-        {/* LADO ESQUERDO: Gráfico Real do Recharts */}
         <div className="col-5" style={{ height: "220px" }}>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
@@ -83,14 +83,13 @@ export default function GraficoDespesas() {
                 dataKey="valorNum"
                 cx="50%"
                 cy="50%"
-                innerRadius={50} // Define o tamanho do "furo" no meio (Gráfico de Rosca/Donut)
-                outerRadius={90} // Define o tamanho total do gráfico
-                paddingAngle={0} // Sem espaço entre as fatias
-                labelLine={false} // Tira aquelas linhas feias de legenda
-                label={renderCustomizedLabel} // Chama a função que escreve a porcentagem
-                stroke="none" // Remove a borda padrão do Reactharts
+                innerRadius={50}
+                outerRadius={90}
+                paddingAngle={0}
+                labelLine={false}
+                label={renderCustomizedLabel}
+                stroke="none"
               >
-                {/* Pinta cada fatia com a cor exata definida lá em cima */}
                 {categorias.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={entry.cor} />
                 ))}
@@ -99,42 +98,44 @@ export default function GraficoDespesas() {
           </ResponsiveContainer>
         </div>
 
-        {/* LADO DIREITO: Legenda */}
         <div className="col-7">
-          {categorias.map((item) => (
-            <div
-              key={item.id}
-              className="d-flex justify-content-between align-items-center mb-3 pe-3"
-            >
-              <div className="d-flex align-items-center gap-2">
+          {categorias.length === 0 ? (
+            <p className="text-muted">Nenhuma despesa cadastrada.</p>
+          ) : (
+            categorias.map((item) => (
+              <div
+                key={item.id}
+                className="d-flex justify-content-between align-items-center mb-3 pe-3"
+              >
+                <div className="d-flex align-items-center gap-2">
+                  <span
+                    className="rounded-circle"
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      backgroundColor: item.cor,
+                    }}
+                  ></span>
+                  <span
+                    className="fw-semibold text-dark"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {item.nome}
+                  </span>
+                </div>
+
                 <span
-                  className="rounded-circle"
-                  style={{
-                    width: "12px",
-                    height: "12px",
-                    backgroundColor: item.cor,
-                  }}
-                ></span>
-                <span
-                  className="fw-semibold text-dark"
+                  className="text-muted fw-semibold"
                   style={{ fontSize: "14px" }}
                 >
-                  {item.nome}
+                  {item.valorText}
                 </span>
               </div>
-
-              <span
-                className="text-muted fw-semibold"
-                style={{ fontSize: "14px" }}
-              >
-                {item.valorText}
-              </span>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 
-      {/* RODAPÉ */}
       <div className="text-end mt-2">
         <a
           href="#"

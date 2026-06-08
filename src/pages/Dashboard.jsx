@@ -138,7 +138,7 @@ export default function Dashboard() {
       <div className="row g-3 mb-3 mx-0 px-4">
         <div className="col-md-8">
           <div className="card border-0 shadow-sm rounded-4 p-3 h-100">
-            <GraficoDespesas />
+            <GraficoDespesas despesas={despesas} />
           </div>
         </div>
 

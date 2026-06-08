@@ -29,6 +29,14 @@
       "categoria": "Salario",
       "formaPagamento": "pix",
       "id": "iF2-6CAwu7c"
+    },
+    {
+      "descricao": "urubu",
+      "valor": "R$ 100,00",
+      "data": "2026-06-08",
+      "categoria": "Outros",
+      "formaPagamento": "pix",
+      "id": "5EMxYsmgH-g"
     }
   ],
   "despesas": [
@@ -47,6 +55,54 @@
       "categoria": "Outros",
       "formaPagamento": "pix",
       "id": "MQ3rZu8QsBM"
+    },
+    {
+      "descricao": "Viajar",
+      "valor": "R$ 1.000,00",
+      "data": "2026-06-09",
+      "categoria": "Lazer",
+      "formaPagamento": "pix",
+      "id": "5gnoEGx4bGo"
+    },
+    {
+      "descricao": "Jogos",
+      "valor": "R$ 100,00",
+      "data": "2026-06-08",
+      "categoria": "Lazer",
+      "formaPagamento": "pix",
+      "id": "ZapG7L3XtZ8"
+    },
+    {
+      "descricao": "urubu",
+      "valor": "R$ 100,00",
+      "data": "2026-06-08",
+      "categoria": "Lazer",
+      "formaPagamento": "pix",
+      "id": "x07jbCJsiE8"
+    },
+    {
+      "descricao": "agiota ",
+      "valor": "R$ 60,00",
+      "data": "2026-06-08",
+      "categoria": "Lazer",
+      "formaPagamento": "pix",
+      "id": "9wMbx_OYFXI"
+    },
+    {
+      "descricao": "Jogo",
+      "valor": "R$ 100,00",
+      "data": "2026-06-09",
+      "categoria": "Lazer",
+      "formaPagamento": "pix",
+      "id": "IGdTRswCxZI"
+    },
+    {
+      "descricao": "theuzin",
+      "valor": "R$ 1.000,00",
+      "data": "2026-06-08",
+      "categoria": "Lazer",
+      "formaPagamento": "debito",
+      "id": "iBhQhlDWu-E"
     }
   ],
   "metas": [

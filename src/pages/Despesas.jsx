@@ -1,30 +1,38 @@
-import React, { useState, useEffect } from "react";
-import ModalDespesa from "../components/ModalDespesa"; 
+import { useState, useEffect } from "react";
+import ModalDespesa from "../components/ModalDespesa";
 import { listarDespesas } from "../controllers/despesaController";
+import { converterMoedaParaNumero } from "../controllers/dashboardController";
 
 export default function Despesas() {
-
+  const [despesas, setDespesas] = useState([]);
   const [showModalDespesa, setShowModalDespesa] = useState(false);
+
   const handleOpenModalDespesa = () => setShowModalDespesa(true);
   const handleCloseModalDespesa = () => setShowModalDespesa(false);
 
-  const [despesas, setDespesas] = useState([]);
+  const carregarDespesas = async () => {
+    try {
+      const data = await listarDespesas();
+      setDespesas(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await listarDespesas();
-        setDespesas(data);
-      } catch (err) {
-        console.error(err);
-      }
+    async function carregar() {
+      await carregarDespesas();
     }
 
-    fetchData();
+    carregar();
   }, []);
 
+  const handleSaveDespesa = async () => {
+    await carregarDespesas();
+  };
+
   const totalDespesas = despesas.reduce(
-    (total, despesa) => total + despesa.valor,
+    (total, despesa) => total + converterMoedaParaNumero(despesa.valor),
     0
   );
 
@@ -145,7 +153,7 @@ export default function Despesas() {
                   </td>
 
                   <td className="p-4">
-                    {despesa.formapagamento}
+                    {despesa.formaPagamento}
                   </td>
 
                   <td
@@ -174,6 +182,7 @@ export default function Despesas() {
       <ModalDespesa
         show={showModalDespesa}
         handleClose={handleCloseModalDespesa}
+        onSave={handleSaveDespesa}
       />
     </div>
 
