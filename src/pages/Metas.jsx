@@ -103,10 +103,7 @@ export default function Metas() {
 
               <div className="proximas-conquistas-list">
                 {proximasConquistas.map((item) => (
-                  <div
-                    key={item.titulo}
-                    className="proxima-conquista-item"
-                  >
+                  <div key={item.titulo} className="proxima-conquista-item">
                     <div className="d-flex align-items-center gap-3">
                       <span
                         className="proxima-conquista-dot"
@@ -151,7 +148,8 @@ export default function Metas() {
                 </ResponsiveContainer>
 
                 <div className="chart-center-badge">
-                  Próximas<br />
+                  Próximas
+                  <br />
                   <span className="fw-bold">Conquistas</span>
                 </div>
               </div>
