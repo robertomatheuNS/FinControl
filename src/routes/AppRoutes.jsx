@@ -4,6 +4,8 @@ import Header from "../components/Header";
 import Dashboard from "../pages/Dashboard";
 import Despesas from "../pages/Despesas";
 import Metas from "../pages/Metas";
+import Receitas from "../pages/Receitas";
+
 
 export default function AppRoutes() {
     return (
