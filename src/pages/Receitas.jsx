@@ -25,11 +25,15 @@ export default function Receitas() {
   };
 
   useEffect(() => {
-    carregarReceitas();
+    const init = async () => {
+      await carregarReceitas();
+    };
+    init();
   }, []);
 
   const handleSaveReceita = async () => {
     await carregarReceitas();
+    handleCloseModalReceita();
   };
 
   // resumo dinâmico

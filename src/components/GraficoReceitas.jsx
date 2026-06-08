@@ -1,20 +1,138 @@
-import { Card } from "./CardResumo";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { converterMoedaParaNumero } from "../controllers/dashboardController";
 
-export default function GraficoReceitas() {
+export default function GraficoReceitas({ receitas = [] }) {
+  const cores = [
+    "#4caf50",
+    "#2196f3",
+    "#ffb74d",
+    "#9c27b0",
+    "#f44336",
+    "#00bcd4",
+    "#ff9800",
+    "#8bc34a",
+  ];
+
+  const formatarMoeda = (valor) =>
+    Number(valor).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+  const categoriasMap = receitas.reduce((acc, receita) => {
+    const nome = receita.categoria?.trim() || "Sem categoria";
+    const valor = converterMoedaParaNumero(receita.valor);
+
+    if (!acc[nome]) {
+      acc[nome] = 0;
+    }
+
+    acc[nome] += valor;
+    return acc;
+  }, {});
+
+  const categorias = Object.entries(categoriasMap).map(
+    ([nome, valor], index) => ({
+      id: nome,
+      nome,
+      valorText: formatarMoeda(valor),
+      valorNum: valor,
+      cor: cores[index % cores.length],
+    })
+  );
+
+  const renderCustomizedLabel = ({
+    cx,
+    cy,
+    midAngle,
+    innerRadius,
+    outerRadius,
+    percent,
+  }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos((-midAngle * Math.PI) / 180);
+    const y = cy + radius * Math.sin((-midAngle * Math.PI) / 180);
+
+    return (
+      <text
+        x={x}
+        y={y}
+        fill="white"
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontSize="12"
+        fontWeight="bold"
+      >
+        {`${(percent * 100).toFixed(0)}%`}
+      </text>
+    );
+  };
+
   return (
-    <Card className="h-100 shadow-sm border-0">
-      <div className="card-body">
-        <h5 className="fw-bold mb-3">
-          Visão Geral por Origem
-        </h5>
+    <div className="d-flex flex-column h-100">
+      <h5 className="fw-bold mb-4">Visão Geral por Origem</h5>
 
-        <ul className="list-unstyled">
-          <li>💼 Salário - 70%</li>
-          <li>💻 Freelance - 15%</li>
-          <li>📈 Investimentos - 10%</li>
-          <li>📦 Outros - 5%</li>
-        </ul>
+      <div className="row flex-grow-1 align-items-center">
+        <div className="col-5" style={{ height: "220px" }}>
+          <ResponsiveContainer width="100%" height={220}>
+            <PieChart>
+              <Pie
+                data={categorias}
+                dataKey="valorNum"
+                cx="50%"
+                cy="50%"
+                innerRadius={50}
+                outerRadius={90}
+                paddingAngle={0}
+                labelLine={false}
+                label={renderCustomizedLabel}
+                stroke="none"
+              >
+                {categorias.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={entry.cor} />
+                ))}
+              </Pie>
+            </PieChart>
+          </ResponsiveContainer>
+        </div>
+
+        <div className="col-7">
+          {categorias.length === 0 ? (
+            <p className="text-muted">Nenhuma receita cadastrada.</p>
+          ) : (
+            categorias.map((item) => (
+              <div
+                key={item.id}
+                className="d-flex justify-content-between align-items-center mb-3 pe-3"
+              >
+                <div className="d-flex align-items-center gap-2">
+                  <span
+                    className="rounded-circle"
+                    style={{
+                      width: "12px",
+                      height: "12px",
+                      backgroundColor: item.cor,
+                    }}
+                  ></span>
+                  <span
+                    className="fw-semibold text-dark"
+                    style={{ fontSize: "14px" }}
+                  >
+                    {item.nome}
+                  </span>
+                </div>
+
+                <span
+                  className="text-muted fw-semibold"
+                  style={{ fontSize: "14px" }}
+                >
+                  {item.valorText}
+                </span>
+              </div>
+            ))
+          )}
+        </div>
       </div>
-    </Card>
+    </div>
   );
 }

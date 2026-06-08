@@ -53,6 +53,14 @@
       "categoria": "Salário",
       "formaPagamento": "pix",
       "id": "p0Qlm7w6lmM"
+    },
+    {
+      "descricao": "Venda de Produto",
+      "valor": "R$ 5,00",
+      "data": "60607-02-20",
+      "categoria": "Investimentos",
+      "formaPagamento": "",
+      "id": "TzLyaN6lFnc"
     }
   ],
   "despesas": [

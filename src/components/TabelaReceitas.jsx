@@ -1,14 +1,24 @@
 import { Card } from "./CardResumo";
+import { converterMoedaParaNumero } from "../controllers/dashboardController";
 
-export default function TabelaReceitas() {
+export default function TabelaReceitas({ receitas = [] }) {
+  const formatarMoeda = (valor) =>
+    Number(valor).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+  const formatarData = (data) => {
+    if (!data) return "";
+    const date = new Date(data);
+    return date.toLocaleDateString("pt-BR");
+  };
+
   return (
     <Card className="shadow-sm border-0">
       <div className="card-body">
-
         <div className="d-flex justify-content-between mb-3">
-          <h5 className="fw-bold">
-            Todas as Transações
-          </h5>
+          <h5 className="fw-bold">Todas as Transações</h5>
 
           <select className="form-select w-auto">
             <option>Este mês</option>
@@ -27,43 +37,28 @@ export default function TabelaReceitas() {
           </thead>
 
           <tbody>
-            <tr>
-              <td>04/06/2024</td>
-              <td>Salário</td>
-              <td>
-                <span className="badge bg-success">
-                  Salário
-                </span>
-              </td>
-              <td>Pagamento</td>
-              <td>R$ 7.500,00</td>
-            </tr>
-
-            <tr>
-              <td>03/06/2024</td>
-              <td>Freelance 1</td>
-              <td>
-                <span className="badge bg-primary">
-                  Freelance
-                </span>
-              </td>
-              <td>PIX</td>
-              <td>R$ 2.200,00</td>
-            </tr>
-
-            <tr>
-              <td>02/06/2024</td>
-              <td>Freelance 2</td>
-              <td>
-                <span className="badge bg-info">
-                  Freelance
-                </span>
-              </td>
-              <td>PIX</td>
-              <td>R$ 1.500,00</td>
-            </tr>
+            {receitas.length === 0 ? (
+              <tr>
+                <td colSpan="5" className="text-center text-muted">
+                  Nenhuma receita cadastrada.
+                </td>
+              </tr>
+            ) : (
+              receitas.map((receita) => (
+                <tr key={receita.id}>
+                  <td>{formatarData(receita.data)}</td>
+                  <td>{receita.descricao}</td>
+                  <td>
+                    <span className="badge bg-success">
+                      {receita.categoria}
+                    </span>
+                  </td>
+                  <td>{receita.formaPagamento}</td>
+                  <td>{formatarMoeda(converterMoedaParaNumero(receita.valor))}</td>
+                </tr>
+              ))
+            )}
           </tbody>
-
         </table>
       </div>
     </Card>

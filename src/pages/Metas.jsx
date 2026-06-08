@@ -4,7 +4,7 @@ import {
 } from "../controllers/metasController";
 
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import ModalMeta from "../components/ModalMeta";
 import ModalGerenciarMeta from "../components/ModalGerenciarMeta";
@@ -37,7 +37,10 @@ export default function Metas() {
   };
 
   useEffect(() => {
-    carregarMetas();
+    const init = async () => {
+      await carregarMetas();
+    };
+    init();
   }, []);
 
   const handleSaveMeta = async () => {

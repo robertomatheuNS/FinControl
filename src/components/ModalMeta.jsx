@@ -24,7 +24,6 @@ export default function ModalMeta({ show, handleClose, onSave }) {
       setLoading(true);
 
       const novaMeta = {
-        id: Date.now(),
         titulo,
         valorMeta,
         acumulado,
