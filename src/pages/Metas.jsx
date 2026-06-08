@@ -1,52 +1,32 @@
-import React from "react";
+import { obterMetas, organizarMetas } from "../controllers/metasController";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import React, { useState, useEffect } from "react";
+import ModalMeta from "../components/ModalMeta";
 import "../styles/metas.css";
 
 export default function Metas() {
-  const metas = [
-    {
-      titulo: "Viagem para o Japão",
-      valorMeta: "R$ 20.000",
-      acumulado: "R$ 15.000",
-      progresso: 75,
-      prazo: "Dez 2024",
-    },
-    {
-      titulo: "Carro Novo",
-      valorMeta: "R$ 50.000",
-      acumulado: "R$ 30.000",
-      progresso: 60,
-      prazo: "Dez 2024",
-    },
-    {
-      titulo: "Reserva de Emergência",
-      valorMeta: "R$ 10.000",
-      acumulado: "R$ 3.000",
-      progresso: 30,
-      prazo: "Jun 2025",
-    },
-  ];
+  const [showModalMeta, setShowModalMeta] = useState(false);
+  const [metas, setMetas] = useState([]);
+  const [proximasConquistas, setProximasConquistas] = useState([]);
 
-  const proximasConquistas = [
-    {
-      titulo: "Viagem Fim de Ano",
-      progresso: 80,
-      cor: "#ef4444",
-      valorMeta: "R$ 10.000",
-    },
-    {
-      titulo: "Carro Novo",
-      progresso: 60,
-      cor: "#2563eb",
-      valorMeta: "R$ 50.000",
-    },
-    {
-      titulo: "Reserva de Emergência",
-      progresso: 30,
-      cor: "#f59e0b",
-      valorMeta: "R$ 10.000",
-    },
-  ];
+  const handleOpenModalMeta = () => setShowModalMeta(true);
+  const handleCloseModalMeta = () => setShowModalMeta(false);
+
+  // Carregar metas da API JSON Server
+  useEffect(() => {
+    const carregarMetas = async () => {
+      try {
+        const todasMetas = await obterMetas();
+        setMetas(todasMetas);
+
+        const conquistas = await organizarMetas();
+        setProximasConquistas(conquistas);
+      } catch (err) {
+        console.error("Erro ao carregar metas:", err);
+      }
+    };
+    carregarMetas();
+  }, []);
 
   const chartData = proximasConquistas.map((item) => ({
     name: item.titulo,
@@ -65,21 +45,26 @@ export default function Metas() {
           </p>
         </div>
 
-        <button className="btn-nova-meta">+ Adicionar Nova Meta</button>
+        <div className="d-flex gap-2">
+          <button className="btn-nova-meta" onClick={handleOpenModalMeta}>
+            + Adicionar Nova Meta
+          </button>
+          <button className="btn-nova-meta">
+            + Adicionar valor a uma meta
+          </button>
+        </div>
       </div>
 
       {/* RESUMO */}
       <div className="card resumo-card mb-4">
         <div className="card-body p-4">
           <div className="row gy-4 align-items-start">
-            {/* ESQUERDA - Resumo Geral */}
+            {/* ESQUERDA */}
             <div className="col-md-4">
               <h4 className="fw-bold mb-4">Resumo Geral das Metas</h4>
-
               <h5 className="fw-bold">
                 Total percentual de todas as metas atingido
               </h5>
-
               <div className="progress my-3" style={{ height: "30px" }}>
                 <div
                   className="progress-bar"
@@ -94,19 +79,17 @@ export default function Metas() {
                   60%
                 </div>
               </div>
-
               <h5>Total Acumulado: R$ 45.000,00</h5>
               <h5>Meta Total: R$ 75.000,00</h5>
             </div>
 
-            {/* MEIO - Próximas Conquistas */}
+            {/* MEIO */}
             <div className="col-md-4 text-center">
               <h4 className="fw-bold mb-4">Próximas Conquistas</h4>
-
               <div className="proximas-conquistas-list">
                 {proximasConquistas.map((item) => (
                   <div
-                    key={item.titulo}
+                    key={item.id}
                     className="proxima-conquista-item d-flex justify-content-between align-items-center mb-3"
                   >
                     <div className="d-flex align-items-center gap-3">
@@ -130,7 +113,7 @@ export default function Metas() {
               </div>
             </div>
 
-            {/* DIREITA - Gráfico circular */}
+            {/* DIREITA */}
             <div className="col-md-4 text-center">
               <div className="proximas-chart-wrapper mx-auto">
                 <ResponsiveContainer width="100%" height={220}>
@@ -151,7 +134,6 @@ export default function Metas() {
                     </Pie>
                   </PieChart>
                 </ResponsiveContainer>
-
                 <div className="chart-center-badge">
                   Próximas
                   <br />
@@ -166,7 +148,6 @@ export default function Metas() {
       {/* LISTA DE METAS */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold">Módulos de Metas Individual</h2>
-
         <div className="btn-group">
           <button className="btn btn-light">Todas</button>
           <button className="btn btn-outline-secondary">Ativas</button>
@@ -175,14 +156,12 @@ export default function Metas() {
       </div>
 
       <div className="row">
-        {metas.map((meta, index) => (
-          <div className="col-md-4 mb-4" key={index}>
+        {metas.map((meta) => (
+          <div className="col-md-4 mb-4" key={meta.id}>
             <div className="card meta-card h-100">
               <div className="card-body">
                 <h4 className="fw-bold">{meta.titulo}</h4>
-
                 <h5 className="text-muted mb-3">({meta.valorMeta})</h5>
-
                 <div className="progress mb-3" style={{ height: "25px" }}>
                   <div
                     className="progress-bar"
@@ -197,10 +176,8 @@ export default function Metas() {
                     {meta.progresso}%
                   </div>
                 </div>
-
                 <p className="fw-bold">Acumulado: {meta.acumulado}</p>
                 <p>Prazo: {meta.prazo}</p>
-
                 <button className="btn-meta w-100">Ver Detalhes</button>
               </div>
             </div>
@@ -215,6 +192,8 @@ export default function Metas() {
           nas metas principais.
         </p>
       </div>
+
+      <ModalMeta show={showModalMeta} handleClose={handleCloseModalMeta} />
     </div>
   );
 }

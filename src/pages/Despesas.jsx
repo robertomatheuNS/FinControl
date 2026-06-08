@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import ModalDespesa from "../components/ModalDespesa"; 
 
 export default function Despesas() {
+
+  const [showModalDespesa, setShowModalDespesa] = useState(false);
+  const handleOpenModalDespesa = () => setShowModalDespesa(true);
+  const handleCloseModalDespesa = () => setShowModalDespesa(false);
+
   const despesas = [
     {
       id: 1,
@@ -54,6 +60,7 @@ export default function Despesas() {
 
         <button
           className="btn text-white px-4 py-2"
+          onClick={handleOpenModalDespesa}
           style={{
             backgroundColor: "#d94a4a",
             borderRadius: "10px",
@@ -182,6 +189,13 @@ export default function Despesas() {
           <strong>Dica:</strong> acompanhe seus gastos para identificar oportunidades de economia e melhorar seu planejamento financeiro.
         </p>
       </div>
+
+      <ModalDespesa
+        show={showModalDespesa}
+        handleClose={handleCloseModalDespesa}
+      />
     </div>
+
+
   );
 }

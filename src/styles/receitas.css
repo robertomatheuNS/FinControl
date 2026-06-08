@@ -1,0 +1,104 @@
+    .receitas-container {
+    padding: 30px;
+    background-color: #f5f5f5;
+    font-family: 'Segoe UI', sans-serif;
+    }
+
+    .receitas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+    .btn-nova {
+    background-color: #d62828;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    }
+
+    .resumo {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .resumo-item {
+    flex: 1;
+    text-align: center;
+    }
+
+    .valor-total {
+    font-size: 22px;
+    font-weight: bold;
+    color: #007f5f;
+    }
+
+    .chart {
+    width: 150px;
+    height: 150px;
+    margin: 0 auto;
+    border-radius: 50%;
+    background: conic-gradient(#d62828 0% 70%, #007f5f 70% 85%, #457b9d 85% 95%, #adb5bd 95% 100%);
+    }
+
+    .visao-mensal {
+    margin-top: 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .progress-bar {
+    background-color: #e9ecef;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    }
+
+    .progress {
+    height: 20px;
+    color: white;
+    text-align: right;
+    padding-right: 5px;
+    font-size: 12px;
+    line-height: 20px;
+    }
+
+    .progress.salario { width: 70%; background-color: #00b37e; }
+    .progress.freelance1 { width: 15%; background-color: #007f5f; }
+    .progress.freelance2 { width: 10%; background-color: #457b9d; }
+    .progress.outros { width: 5%; background-color: #adb5bd; }
+
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    }
+
+    th, td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+    }
+
+    th {
+    background-color: #007f5f;
+    color: white;
+    }
+
+    .origem {
+    background-color: #00b37e;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 12px;
+    }

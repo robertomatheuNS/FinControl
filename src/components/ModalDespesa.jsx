@@ -10,21 +10,48 @@ export default function ModalDespesa({
   const [descricao, setDescricao] = useState("");
   const [valorD, setValorD] = useState("");
   const [data, setData] = useState("");
+
+  // 🔥 novos estados
+  const [categoria, setCategoria] = useState("");
+  const [novaCategoria, setNovaCategoria] = useState("");
+  const [mostrarNovaCategoria, setMostrarNovaCategoria] = useState(false);
+
+  const [formaPagamento, setFormaPagamento] = useState("");
+
   const [loading, setLoading] = useState(false);
+
+  // categorias iniciais
+  const [categorias, setCategorias] = useState([
+    "Alimentação",
+    "Transporte",
+    "Lazer",
+    "Contas",
+    "Outros",
+  ]);
 
   const salvarDespesa = async () => {
     try {
       setLoading(true);
 
+      const categoriaFinal =
+        categoria === "nova"
+          ? novaCategoria
+          : categoria;
+
       await criarDespesa({
         descricao,
         valor: valorD,
         data,
+        categoria: categoriaFinal,
+        formaPagamento,
       });
 
       setDescricao("");
       setValorD("");
       setData("");
+      setCategoria("");
+      setFormaPagamento("");
+      setNovaCategoria("");
 
       handleClose();
     } catch (error) {
@@ -33,6 +60,15 @@ export default function ModalDespesa({
     } finally {
       setLoading(false);
     }
+  };
+
+  const adicionarCategoria = () => {
+    if (!novaCategoria.trim()) return;
+
+    setCategorias([...categorias, novaCategoria]);
+    setCategoria(novaCategoria);
+    setNovaCategoria("");
+    setMostrarNovaCategoria(false);
   };
 
   if (!show) return null;
@@ -60,6 +96,7 @@ export default function ModalDespesa({
         <div className="modal-dialog modal-dialog-centered">
           <div className="modal-content">
 
+            {/* HEADER */}
             <div className="modal-header">
               <div className="d-flex align-items-center gap-3">
                 <div className="bg-danger bg-opacity-10 text-danger p-2 rounded">
@@ -70,7 +107,6 @@ export default function ModalDespesa({
                   <h5 className="modal-title mb-0">
                     Nova Despesa
                   </h5>
-
                   <small className="text-muted">
                     Registrar uma nova saída
                   </small>
@@ -83,7 +119,10 @@ export default function ModalDespesa({
               />
             </div>
 
+            {/* BODY */}
             <div className="modal-body">
+
+              {/* descrição */}
               <input
                 type="text"
                 className="form-control mb-3"
@@ -94,22 +133,86 @@ export default function ModalDespesa({
                 }
               />
 
+              {/* valor */}
               <InputMoeda
                 value={valorD}
                 onChange={setValorD}
                 className="mb-3"
               />
 
+              {/* data */}
               <input
                 type="date"
-                className="form-control"
+                className="form-control mb-3"
                 value={data}
                 onChange={(e) =>
                   setData(e.target.value)
                 }
               />
+
+              {/* categoria */}
+              <select
+                className="form-control mb-2"
+                value={categoria}
+                onChange={(e) => {
+                  const value = e.target.value;
+                  setCategoria(value);
+                  setMostrarNovaCategoria(value === "nova");
+                }}
+              >
+                <option value="">Categoria</option>
+                {categorias.map((cat, index) => (
+                  <option key={index} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+                <option value="nova">
+                  + Criar nova categoria
+                </option>
+              </select>
+
+              {/* criar nova categoria */}
+              {mostrarNovaCategoria && (
+                <div className="d-flex gap-2 mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    placeholder="Nova categoria"
+                    value={novaCategoria}
+                    onChange={(e) =>
+                      setNovaCategoria(e.target.value)
+                    }
+                  />
+
+                  <button
+                    className="btn btn-success"
+                    onClick={adicionarCategoria}
+                  >
+                    Add
+                  </button>
+                </div>
+              )}
+
+              {/* forma de pagamento */}
+              <select
+                className="form-control"
+                value={formaPagamento}
+                onChange={(e) =>
+                  setFormaPagamento(e.target.value)
+                }
+              >
+                <option value="">
+                  Forma de pagamento
+                </option>
+                <option value="pix">Pix</option>
+                <option value="debito">Débito</option>
+                <option value="credito">Crédito</option>
+                <option value="dinheiro">Dinheiro</option>
+              </select>
+
             </div>
 
+            {/* FOOTER */}
             <div className="modal-footer">
               <button
                 className="btn btn-secondary"
