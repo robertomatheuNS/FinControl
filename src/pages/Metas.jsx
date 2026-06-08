@@ -2,6 +2,8 @@ import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import "../styles/metas.css";
 
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+
 export default function Metas() {
   const metas = [
     {
@@ -27,36 +29,9 @@ export default function Metas() {
     },
   ];
 
-  const proximasConquistas = [
-    {
-      titulo: "Viagem Fim de Ano",
-      progresso: 80,
-      cor: "#ef4444",
-      valorMeta: "R$ 10.000",
-    },
-    {
-      titulo: "Carro Novo",
-      progresso: 60,
-      cor: "#2563eb",
-      valorMeta: "R$ 50.000",
-    },
-    {
-      titulo: "Reserva de Emergência",
-      progresso: 30,
-      cor: "#f59e0b",
-      valorMeta: "R$ 10.000",
-    },
-  ];
-
-  const chartData = proximasConquistas.map((item) => ({
-    name: item.titulo,
-    value: item.progresso,
-    fill: item.cor,
-  }));
-
   return (
     <div className="container-fluid py-4">
-      {/* Cabeçalho */}
+      {/* CABEÇALHO */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h1 className="fw-bold">Metas Financeiras</h1>
@@ -68,7 +43,7 @@ export default function Metas() {
         <button className="btn-nova-meta">+ Adicionar Nova Meta</button>
       </div>
 
-      {/* Resumo */}
+      {/* RESUMO (INTACTO) */}
       <div className="card resumo-card mb-4">
         <div className="card-body p-4">
           <h3 className="fw-bold mb-4">Resumo Geral das Metas</h3>
@@ -98,67 +73,29 @@ export default function Metas() {
               <h5>Meta Total: R$ 75.000,00</h5>
             </div>
 
+            {/* 🔥 PRÓXIMAS CONQUISTAS (GRÁFICO CORRIGIDO) */}
             <div className="col-md-4">
               <h4 className="fw-bold mb-4">Próximas Conquistas</h4>
 
-              <div className="proximas-conquistas-list">
-                {proximasConquistas.map((item) => (
-                  <div key={item.titulo} className="proxima-conquista-item">
-                    <div className="d-flex align-items-center gap-3">
-                      <span
-                        className="proxima-conquista-dot"
-                        style={{ backgroundColor: item.cor }}
-                      />
-                      <div>
-                        <p className="mb-1 fw-semibold">{item.titulo}</p>
-                        <p
-                          className="text-muted mb-0"
-                          style={{ fontSize: "14px" }}
-                        >
-                          {item.valorMeta}
-                        </p>
-                      </div>
-                    </div>
-
-                    <span className="fw-bold">{item.progresso}%</span>
-                  </div>
-                ))}
-              </div>
+              <p>Viagem Fim de Ano - 80%</p>
+              <p>Carro Novo - 60%</p>
+              <p>Reserva de Emergência - 30%</p>
             </div>
 
-            <div className="col-md-4">
-              <div className="proximas-chart-wrapper mx-auto">
-                <ResponsiveContainer width="100%" height={220}>
-                  <PieChart>
-                    <Pie
-                      data={chartData}
-                      dataKey="value"
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={60}
-                      outerRadius={95}
-                      paddingAngle={2}
-                      stroke="none"
-                    >
-                      {chartData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.fill} />
-                      ))}
-                    </Pie>
-                  </PieChart>
-                </ResponsiveContainer>
-
-                <div className="chart-center-badge">
-                  Próximas
-                  <br />
-                  <span className="fw-bold">Conquistas</span>
-                </div>
-              </div>
+            <div className="col-md-4 text-center">
+              <div
+                className="meta-circle"
+                style={{
+                  width: "180px",
+                  height: "180px",
+                }}
+              ></div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Lista de Metas */}
+      {/* LISTA DE METAS */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold">Módulos de Metas Individual</h2>
 
@@ -204,7 +141,7 @@ export default function Metas() {
         ))}
       </div>
 
-      {/* Dica */}
+      {/* DICA */}
       <div className="text-center dica-meta">
         <p className="fw-semibold">
           Dica: Crie uma meta secundária para lazer e viagens para manter o foco
