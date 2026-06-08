@@ -1,47 +1,44 @@
+import { useEffect, useState } from "react";
+import { listarDespesas } from "../controllers/despesaController";
+import { listarReceitas } from "../controllers/receitaController";
+
 export default function UltimasTransacoes() {
-  // Array com os dados exatos do seu print para gerar a tabela automaticamente
-  const transacoes = [
-    {
-      id: 1,
-      data: "05/06/2024",
-      descricao: "Salário",
-      categoria: "Salário",
-      tipo: "receita",
-      valor: "R$ 3.000,00",
-    },
-    {
-      id: 2,
-      data: "04/06/2024",
-      descricao: "Mercado",
-      categoria: "Alimentação",
-      tipo: "despesa",
-      valor: "- R$ 150,00",
-    },
-    {
-      id: 3,
-      data: "03/06/2024",
-      descricao: "Uber",
-      categoria: "Transporte",
-      tipo: "despesa",
-      valor: "- R$ 25,00",
-    },
-    {
-      id: 4,
-      data: "02/06/2024",
-      descricao: "Conta de Luz",
-      categoria: "Contas",
-      tipo: "despesa",
-      valor: "- R$ 200,00",
-    },
-    {
-      id: 5,
-      data: "01/06/2024",
-      descricao: "Freelance",
-      categoria: "Trabalho",
-      tipo: "receita",
-      valor: "R$ 500,00",
-    },
-  ];
+
+  const [transacoes, setTransacoes] = useState([]);
+
+  useEffect(() => {
+    async function carregar() {
+      const receitas = await listarReceitas();
+      const despesas = await listarDespesas();
+
+      const formatadasReceitas = receitas.map((r) => ({
+        id: r.id,
+        data: r.data,
+        descricao: r.descricao,
+        categoria: r.categoria,
+        tipo: "receita",
+        valor: r.valor,
+      }));
+
+      const formatadasDespesas = despesas.map((d) => ({
+        id: d.id,
+        data: d.data,
+        descricao: d.descricao,
+        categoria: d.categoria,
+        tipo: "despesa",
+        valor: d.valor,
+      }));
+
+      const todas = [...formatadasReceitas, ...formatadasDespesas];
+
+      const ordenadas = todas.sort(
+        (a, b) => new Date(b.data) - new Date(a.data)
+      );
+
+      setTransacoes(ordenadas.slice(0, 5));
+    }
+    carregar();
+  }, []);
 
   return (
     <div className="d-flex flex-column h-100">
@@ -90,7 +87,6 @@ export default function UltimasTransacoes() {
           <tbody>
             {transacoes.map((t) => (
               <tr key={t.id}>
-                {/* As classes py-3 dão um espaçamento confortável (padding) em cima e embaixo do texto */}
                 <td className="py-3 border-bottom border-light">{t.data}</td>
                 <td className="py-3 border-bottom border-light fw-semibold text-dark">
                   {t.descricao}
