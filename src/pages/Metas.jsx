@@ -1,9 +1,15 @@
-import React from "react";
-import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
-import "../styles/metas.css";
 import { obterMetas, organizarMetas } from "../controllers/metaController";
+import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import React, { useState } from "react";
+import ModalMeta  from "../components/ModalMeta"
+import "../styles/metas.css";
 
 export default function Metas() {
+
+    const [showModalMeta, setShowModalMeta] = useState(false);
+    const handleOpenModalMeta = () => setShowModalMeta(true);
+    const handleCloseModalMeta = () => setShowModalMeta(false);
+
     const metas = obterMetas();
     const proximasConquistas = organizarMetas();
 
@@ -26,7 +32,7 @@ export default function Metas() {
 
                 {/* BOTÕES LADO A LADO */}
                 <div className="d-flex gap-2">
-                    <button className="btn-nova-meta">
+                    <button className="btn-nova-meta" onClick={handleOpenModalMeta}>
                         + Adicionar Nova Meta
                     </button>
 
@@ -205,6 +211,10 @@ export default function Metas() {
                     manter o foco nas metas principais.
                 </p>
             </div>
+            <ModalMeta
+                show={showModalMeta}
+                handleClose={handleCloseModalMeta}
+            />
         </div>
     );
 }
