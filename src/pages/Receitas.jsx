@@ -5,6 +5,7 @@ import RecebimentosRecentes from "../components/RecebimentosRecentes";
 import FontesRenda from "../components/FontesRenda";
 import TabelaReceitas from "../components/TabelaReceitas";
 import ModalReceita from "../components/ModalReceita";
+import "../styles/receitas.css";
 
 export default function Receitas() {
 
@@ -13,7 +14,7 @@ export default function Receitas() {
     const handleCloseModalReceita = () => setShowModalReceita(false);
 
     return (
-        <div className="container-fluid py-4">
+        <div className="container-fluid py-4 receitas-page">
 
             <div className="d-flex justify-content-between align-items-center mb-4">
                 <div>
@@ -31,7 +32,7 @@ export default function Receitas() {
                 </button>
             </div>
 
-            <Card className="shadow-sm border-0 p-4 mb-4">
+            <Card className="shadow-sm border-0 p-4 mb-4 resumo-card">
 
                 <h3 className="fw-bold mb-4">
                     Resumo de Receitas

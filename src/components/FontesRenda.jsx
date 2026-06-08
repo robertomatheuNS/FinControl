@@ -2,7 +2,7 @@ import { Card } from "./CardResumo";
 
 export default function FontesRenda() {
   return (
-    <Card className="shadow-sm border-0">
+    <Card className="shadow-sm border-0 fontes-renda-card">
       <div className="card-body">
         <h5 className="fw-bold mb-4">
           Principais Fontes de Renda
