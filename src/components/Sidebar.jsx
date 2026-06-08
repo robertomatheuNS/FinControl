@@ -8,7 +8,6 @@ export default function Sidebar() {
     { label: "Receitas", icon: "bi-graph-up-arrow", path: "/receitas" },
     { label: "Despesas", icon: "bi-graph-down-arrow", path: "/despesas" },
     { label: "Metas Financeiras", icon: "bi-bullseye", path: "/metas" },
-    { label: "Relatórios", icon: "bi-file-earmark-text", path: "/relatorios" },
   ];
 
   return (
