@@ -5,6 +5,14 @@
       "valor": "R$ 20,00",
       "data": "2005-12-29",
       "id": "gkJpCDIzO7o"
+    },
+    {
+      "descricao": "freelancer",
+      "valor": "R$ 1.000,00",
+      "data": "2026-06-03",
+      "categoria": "Freelance",
+      "formaPagamento": "dinheiro",
+      "id": "lB6lv0V9Ajc"
     }
   ],
   "despesas": [
@@ -17,5 +25,6 @@
       "id": "r1HGt7q_yaY"
     }
   ],
+  "metas": [],
   "$schema": "./node_modules/json-server/schema.json"
 }
