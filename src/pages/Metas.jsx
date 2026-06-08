@@ -1,6 +1,13 @@
 import React from "react";
 import "../styles/metas.css";
 
+import {
+  PieChart,
+  Pie,
+  Cell,
+  ResponsiveContainer,
+} from "recharts";
+
 export default function Metas() {
   const metas = [
     {
@@ -26,9 +33,17 @@ export default function Metas() {
     },
   ];
 
+  // 🔵 dados do gráfico "Próximas Conquistas"
+  const proximasConquistas = metas.map((meta, index) => ({
+    nome: meta.titulo,
+    valor: meta.progresso,
+    cor: ["#9333ea", "#a855f7", "#c084fc"][index],
+  }));
+
   return (
     <div className="container-fluid py-4">
-      {/* Cabeçalho */}
+
+      {/* CABEÇALHO */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <div>
           <h1 className="fw-bold">Metas Financeiras</h1>
@@ -42,9 +57,10 @@ export default function Metas() {
         </button>
       </div>
 
-      {/* Resumo */}
+      {/* RESUMO (INTACTO) */}
       <div className="card resumo-card mb-4">
         <div className="card-body p-4">
+
           <h3 className="fw-bold mb-4">
             Resumo Geral das Metas
           </h3>
@@ -77,16 +93,66 @@ export default function Metas() {
               <h5>Meta Total: R$ 75.000,00</h5>
             </div>
 
+            {/* 🔥 PRÓXIMAS CONQUISTAS (GRÁFICO CORRIGIDO) */}
             <div className="col-md-4">
-              <h4 className="fw-bold mb-4">
+              <h4 className="fw-bold mb-3">
                 Próximas Conquistas
               </h4>
 
-              <p>Viagem Fim de Ano - 80%</p>
-              <p>Carro Novo - 60%</p>
-              <p>Reserva de Emergência - 30%</p>
+              <div style={{ width: "100%", height: 200 }}>
+                <ResponsiveContainer width="100%" height="100%">
+                  <PieChart>
+                    <Pie
+                      data={proximasConquistas}
+                      dataKey="valor"
+                      cx="50%"
+                      cy="50%"
+                      innerRadius={50}
+                      outerRadius={80}
+                      stroke="none"
+                    >
+                      {proximasConquistas.map((item, index) => (
+                        <Cell key={index} fill={item.cor} />
+                      ))}
+                    </Pie>
+                  </PieChart>
+                </ResponsiveContainer>
+              </div>
+
+              {/* 🔥 LEGENDA COMPLETA (RECUPERA INFORMAÇÕES) */}
+              <div className="mt-3">
+                {proximasConquistas.map((item, index) => (
+                  <div
+                    key={index}
+                    className="d-flex justify-content-between align-items-center mb-2"
+                  >
+                    <div className="d-flex align-items-center gap-2">
+                      <span
+                        style={{
+                          width: "10px",
+                          height: "10px",
+                          borderRadius: "50%",
+                          backgroundColor: item.cor,
+                          display: "inline-block",
+                        }}
+                      />
+                      <span style={{ fontSize: "13px" }}>
+                        {item.nome}
+                      </span>
+                    </div>
+
+                    <span
+                      className="text-muted"
+                      style={{ fontSize: "13px" }}
+                    >
+                      {item.valor}%
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
 
+            {/* COLUNA DIREITA (mantida como estava) */}
             <div className="col-md-4 text-center">
               <div
                 className="meta-circle"
@@ -96,26 +162,21 @@ export default function Metas() {
                 }}
               ></div>
             </div>
+
           </div>
         </div>
       </div>
 
-      {/* Lista de Metas */}
+      {/* LISTA DE METAS */}
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h2 className="fw-bold">
           Módulos de Metas Individual
         </h2>
 
         <div className="btn-group">
-          <button className="btn btn-light">
-            Todas
-          </button>
-          <button className="btn btn-outline-secondary">
-            Ativas
-          </button>
-          <button className="btn btn-outline-secondary">
-            Concluídas
-          </button>
+          <button className="btn btn-light">Todas</button>
+          <button className="btn btn-outline-secondary">Ativas</button>
+          <button className="btn btn-outline-secondary">Concluídas</button>
         </div>
       </div>
 
@@ -124,9 +185,8 @@ export default function Metas() {
           <div className="col-md-4 mb-4" key={index}>
             <div className="card meta-card h-100">
               <div className="card-body">
-                <h4 className="fw-bold">
-                  {meta.titulo}
-                </h4>
+
+                <h4 className="fw-bold">{meta.titulo}</h4>
 
                 <h5 className="text-muted mb-3">
                   ({meta.valorMeta})
@@ -159,19 +219,21 @@ export default function Metas() {
                 <button className="btn-meta w-100">
                   Ver Detalhes
                 </button>
+
               </div>
             </div>
           </div>
         ))}
       </div>
 
-      {/* Dica */}
+      {/* DICA */}
       <div className="text-center dica-meta">
         <p className="fw-semibold">
           Dica: Crie uma meta secundária para lazer e viagens para
           manter o foco nas metas principais.
         </p>
       </div>
+
     </div>
   );
 }
