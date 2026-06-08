@@ -1,220 +1,253 @@
-import { useState } from "react";
-import {
-    TrendingDown,
-    Search,
-    Calendar,
-    ChevronDown,
-    ShoppingCart,
-    Home,
-    Utensils,
-    Gamepad2,
-    Trash2,
-    } from "lucide-react";
+import React from "react";
 
-    export default function Despesas() {
-    const [search, setSearch] = useState("");
-
-    const [expenses, setExpenses] = useState([
+export default function Despesas() {
+    const despesas = [
         {
-        id: 1,
-        date: "03/06/2024",
-        description: "Transporte (Uber)",
-        category: "Transporte",
-        payment: "Pix",
-        value: 25,
-        icon: ShoppingCart,
+        data: "03/06/2024",
+        descricao: "Transporte (Uber)",
+        categoria: "Transporte",
+        categoriaClass: "bg-primary-subtle text-primary",
+        pagamento: "Pix",
+        valor: "25,00",
+        icone: "🚕",
         },
         {
-        id: 2,
-        date: "02/06/2024",
-        description: "Conta de luz",
-        category: "Contas",
-        payment: "Débito Automático",
-        value: 200,
-        icon: Home,
+        data: "02/06/2024",
+        descricao: "Conta de luz",
+        categoria: "Contas",
+        categoriaClass: "bg-warning-subtle text-warning",
+        pagamento: "Débito Automático",
+        valor: "200,00",
+        icone: "🏠",
         },
         {
-        id: 3,
-        date: "01/06/2024",
-        description: "Alimentação",
-        category: "Alimentação",
-        payment: "Cartão de Débito",
-        value: 120,
-        icon: Utensils,
+        data: "01/06/2024",
+        descricao: "Alimentação",
+        categoria: "Alimentação",
+        categoriaClass: "bg-danger-subtle text-danger",
+        pagamento: "Cartão de Débito",
+        valor: "120,00",
+        icone: "🍴",
         },
         {
-        id: 4,
-        date: "31/05/2024",
-        description: "Lazer",
-        category: "Lazer",
-        payment: "Pix",
-        value: 100,
-        icon: Gamepad2,
+        data: "31/05/2024",
+        descricao: "Lazer",
+        categoria: "Lazer",
+        categoriaClass: "bg-info-subtle text-info",
+        pagamento: "Pix",
+        valor: "100,00",
+        icone: "🎮",
         },
-    ]);
-
-    const totalExpenses = expenses.reduce(
-        (total, expense) => total + expense.value,
-        0
-    );
-
-    const deleteExpense = (id) => {
-        setExpenses(expenses.filter((expense) => expense.id !== id));
-    };
-
-    const filteredExpenses = expenses.filter((expense) =>
-        expense.description.toLowerCase().includes(search.toLowerCase())
-    );
+    ];
 
     return (
-        <div className="p-6 space-y-6">
+        <div className="container-fluid py-3">
+
         {/* Cabeçalho */}
-        <div className="flex justify-between items-center">
+        <div className="d-flex justify-content-between align-items-start mb-4">
+
             <div>
-            <h1 className="text-3xl font-bold">Despesas</h1>
-            <p className="text-gray-500">
+            <h1 className="fw-bold mb-2">Despesas</h1>
+            <p className="text-muted">
                 Acompanhe todas as saídas
             </p>
             </div>
 
-            <button className="bg-red-600 hover:bg-red-700 text-white px-5 py-3 rounded-lg font-medium">
+            <button
+            className="btn text-white px-4 py-2"
+            style={{
+                backgroundColor: "#d94b4b",
+                borderRadius: "10px",
+                fontWeight: "600",
+                minWidth: "180px",
+            }}
+            >
             + Nova Despesa
             </button>
+
         </div>
 
         {/* Card Total */}
-        <div className="bg-red-50 border border-red-100 rounded-xl p-6">
-            <div className="flex items-center gap-4">
-            <div className="bg-red-600 p-4 rounded-full">
-                <TrendingDown className="text-white" size={28} />
+        <div
+            className="card border-0 mb-4"
+            style={{
+            backgroundColor: "#fff5f5",
+            borderRadius: "15px",
+            }}
+        >
+            <div className="card-body p-4">
+
+            <div className="d-flex align-items-center">
+
+                <div
+                className="d-flex justify-content-center align-items-center me-4"
+                style={{
+                    width: "80px",
+                    height: "80px",
+                    backgroundColor: "#d94b4b",
+                    borderRadius: "50%",
+                    color: "white",
+                    fontSize: "32px",
+                }}
+                >
+                ↘
+                </div>
+
+                <div>
+                <h5 className="mb-1">
+                    Total de despesas
+                </h5>
+
+                <h1
+                    className="fw-bold mb-1"
+                    style={{ color: "#d94b4b" }}
+                >
+                    R$ 1.500,00
+                </h1>
+
+                <p className="text-muted mb-0">
+                    Este mês
+                </p>
+                </div>
+
             </div>
 
-            <div>
-                <p className="text-gray-600">
-                Total de despesas
-                </p>
-
-                <h2 className="text-4xl font-bold text-red-600">
-                R${" "}
-                {totalExpenses.toLocaleString("pt-BR", {
-                    minimumFractionDigits: 2,
-                })}
-                </h2>
-
-                <p className="text-gray-500">
-                Este mês
-                </p>
-            </div>
             </div>
         </div>
 
         {/* Filtros */}
-        <div className="flex gap-4">
-            <button className="flex items-center gap-2 border px-4 py-2 rounded-lg">
-            <span>Este mês</span>
-            <Calendar size={18} />
-            <ChevronDown size={18} />
-            </button>
+        <div className="row mb-4">
 
-            <div className="relative flex-1">
+            <div className="col-md-3">
+            <select
+                className="form-select"
+                style={{ height: "55px" }}
+            >
+                <option>Este mês</option>
+                <option>Últimos 3 meses</option>
+                <option>Este ano</option>
+            </select>
+            </div>
+
+            <div className="col-md-9">
             <input
                 type="text"
+                className="form-control"
                 placeholder="Buscar despesa..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="w-full border rounded-lg px-10 py-2"
-            />
-
-            <Search
-                size={18}
-                className="absolute left-3 top-3 text-gray-400"
+                style={{ height: "55px" }}
             />
             </div>
+
         </div>
 
         {/* Tabela */}
-        <div className="bg-white rounded-xl border overflow-hidden">
-            <table className="w-full">
-            <thead>
-                <tr className="border-b bg-gray-50">
-                <th className="text-left p-4">Data</th>
-                <th className="text-left p-4">Descrição</th>
-                <th className="text-left p-4">Categoria</th>
-                <th className="text-left p-4">
+        <div
+            className="card border-0 shadow-sm"
+            style={{
+            borderRadius: "15px",
+            }}
+        >
+            <div className="card-body p-0">
+
+            <table className="table align-middle mb-0">
+
+                <thead>
+                <tr>
+                    <th className="p-4">Data</th>
+                    <th className="p-4">Descrição</th>
+                    <th className="p-4">Categoria</th>
+                    <th className="p-4">
                     Forma de Pagamento
-                </th>
-                <th className="text-right p-4">Valor</th>
-                <th></th>
+                    </th>
+                    <th className="p-4 text-end">
+                    Valor
+                    </th>
+                    <th></th>
                 </tr>
-            </thead>
+                </thead>
 
-            <tbody>
-                {filteredExpenses.map((expense) => {
-                const Icon = expense.icon;
+                <tbody>
 
-                return (
-                    <tr
-                    key={expense.id}
-                    className="border-b hover:bg-gray-50"
-                    >
-                    <td className="p-4">
-                        <div className="flex items-center gap-3">
-                        <div className="bg-red-500 p-2 rounded-full">
-                            <Icon
-                            className="text-white"
-                            size={18}
-                            />
-                        </div>
-
-                        {expense.date}
-                        </div>
-                    </td>
+                {despesas.map((item, index) => (
+                    <tr key={index}>
 
                     <td className="p-4">
-                        {expense.description}
-                    </td>
 
-                    <td className="p-4">
-                        {expense.category}
-                    </td>
+                        <div className="d-flex align-items-center gap-3">
 
-                    <td className="p-4">
-                        {expense.payment}
-                    </td>
-
-                    <td className="p-4 text-right text-red-600 font-semibold">
-                        - R${" "}
-                        {expense.value.toLocaleString("pt-BR", {
-                        minimumFractionDigits: 2,
-                        })}
-                    </td>
-
-                    <td className="p-4">
-                        <button
-                        onClick={() =>
-                            deleteExpense(expense.id)
-                        }
+                        <div
+                            className="d-flex justify-content-center align-items-center"
+                            style={{
+                            width: "45px",
+                            height: "45px",
+                            borderRadius: "50%",
+                            backgroundColor: "#d94b4b",
+                            color: "white",
+                            }}
                         >
-                        <Trash2
-                            size={18}
-                            className="text-red-500"
-                        />
-                        </button>
+                            {item.icone}
+                        </div>
+
+                        {item.data}
+
+                        </div>
+
                     </td>
+
+                    <td className="p-4">
+                        {item.descricao}
+                    </td>
+
+                    <td className="p-4">
+
+                        <span
+                        className={`badge rounded-pill px-3 py-2 ${item.categoriaClass}`}
+                        >
+                        {item.categoria}
+                        </span>
+
+                    </td>
+
+                    <td className="p-4">
+                        {item.pagamento}
+                    </td>
+
+                    <td
+                        className="p-4 text-end fw-bold"
+                        style={{
+                        color: "#c94a4a",
+                        }}
+                    >
+                        - R$ {item.valor}
+                    </td>
+
+                    <td
+                        className="text-center"
+                        style={{
+                        fontSize: "24px",
+                        color: "#999",
+                        }}
+                    >
+                        ›
+                    </td>
+
                     </tr>
-                );
-                })}
-            </tbody>
+                ))}
+
+                </tbody>
+
             </table>
 
-            <div className="p-6 text-center">
-            <p className="text-gray-500">
-                <strong>Dica:</strong> acompanhe seus
-                gastos por categoria e identifique onde
-                pode economizar.
-            </p>
             </div>
         </div>
+
+        {/* Dica */}
+        <div className="text-center mt-5">
+            <p>
+            <strong>Dica:</strong> acompanhe seus gastos por categoria e identifique onde pode economizar.
+            </p>
+        </div>
+
         </div>
     );
 }

@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/metas.css";
 
 export default function Metas() {
     const metas = [
@@ -36,13 +37,13 @@ export default function Metas() {
             </p>
             </div>
 
-            <button className="btn btn-danger px-4">
+            <button className="btn-nova-meta">
             + Adicionar Nova Meta
             </button>
         </div>
 
         {/* Resumo */}
-        <div className="card shadow-sm border-0 mb-4">
+        <div className="card resumo-card mb-4">
             <div className="card-body p-4">
             <h3 className="fw-bold mb-4">
                 Resumo Geral das Metas
@@ -82,7 +83,7 @@ export default function Metas() {
 
                 <div className="col-md-4 text-center">
                 <div
-                    className="rounded-circle border border-5 border-danger mx-auto"
+                    className="meta-circle"
                     style={{
                     width: "180px",
                     height: "180px",
@@ -115,7 +116,7 @@ export default function Metas() {
         <div className="row">
             {metas.map((meta, index) => (
             <div className="col-md-4 mb-4" key={index}>
-                <div className="card shadow-sm border-0 h-100">
+                <div className="card meta-card h-100">
                 <div className="card-body">
                     <h4 className="fw-bold">
                     {meta.titulo}
@@ -145,7 +146,7 @@ export default function Metas() {
 
                     <p>Prazo: {meta.prazo}</p>
 
-                    <button className="btn btn-danger w-100">
+                    <button className="btn-meta w-100">
                     Ver Detalhes
                     </button>
                 </div>
@@ -155,7 +156,7 @@ export default function Metas() {
         </div>
 
         {/* Dica */}
-        <div className="text-center mt-4">
+        <div className="text-center dica-meta">
             <p className="fw-semibold">
             Dica: Crie uma meta secundária para
             lazer e viagens para manter o foco nas
