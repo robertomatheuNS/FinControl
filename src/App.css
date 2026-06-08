@@ -204,11 +204,16 @@ path:focus {
   border-radius: 20px;
   overflow: hidden;
   background-color: #edf2f7;
+  display: flex; /* garante comportamento correto */
 }
 
 .progress-bar {
-  background-color: #a855f7;
+  background: #a855f7;
   font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;   /* 🔥 ESSENCIAL */
 }
 
 /* Cards individuais */
