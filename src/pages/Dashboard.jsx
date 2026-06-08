@@ -4,70 +4,34 @@ import GraficoDespesas from "../components/GraficoDespesas";
 import AcoesRapidas from "../components/AcoesRapidas";
 import UltimasTransacoes from "../components/UltimasTransacoes";
 import MetasFinanceiras from "../components/MetasFinanceiras";
-import { listarReceitas } from "../controllers/receitaController";
-import { listarDespesas } from "../controllers/despesaController";
+import {
+  carregarReceitas,
+  carregarDespesas,
+  formatarMoeda,
+  calcularTotalReceitas,
+  calcularTotalDespesas,
+  calcularSaldoAtual,
+} from "../controllers/dashboardController";
 
 export default function Dashboard() {
   const [receitas, setReceitas] = useState([]);
   const [despesas, setDespesas] = useState([]);
 
-  const carregarReceitas = async () => {
-    try {
-      const todas = await listarReceitas();
-      setReceitas(todas);
-    } catch (err) {
-      console.error("Erro ao carregar receitas:", err);
-    }
-  };
-
-  const carregarDespesas = async () => {
-    try {
-      const todas = await listarDespesas();
-      setDespesas(todas);
-    } catch (err) {
-      console.error("Erro ao carregar despesas:", err);
-    }
-  };
-
   useEffect(() => {
     async function carregarDados() {
-      await carregarReceitas();
-      await carregarDespesas();
+      const todasReceitas = await carregarReceitas();
+      setReceitas(todasReceitas);
+
+      const todasDespesas = await carregarDespesas();
+      setDespesas(todasDespesas);
     }
 
     carregarDados();
   }, []);
 
-  const converterMoedaParaNumero = (valor) => {
-    if (typeof valor === "number") return valor;
-    if (!valor) return 0;
-    return Number(
-      String(valor)
-        .replace("R$", "")
-        .replace(/\./g, "")
-        .replace(/,/g, ".")
-        .replace(/\s/g, "")
-        .trim()
-    ) || 0;
-  };
-
-  const formatarMoeda = (valor) =>
-    Number(valor).toLocaleString("pt-BR", {
-      style: "currency",
-      currency: "BRL",
-    });
-
-  const totalReceitas = receitas.reduce(
-    (acc, item) => acc + converterMoedaParaNumero(item.valor),
-    0
-  );
-
-  const totalDespesas = despesas.reduce(
-    (acc, item) => acc + converterMoedaParaNumero(item.valor),
-    0
-  );
-
-  const saldoAtual = totalReceitas - totalDespesas;
+  const totalReceitas = calcularTotalReceitas(receitas);
+  const totalDespesas = calcularTotalDespesas(despesas);
+  const saldoAtual = calcularSaldoAtual(receitas, despesas);
 
   return (
     // Container com padding ajustado para não comprimir o conteúdo
