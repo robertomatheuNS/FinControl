@@ -1,10 +1,74 @@
+import { useState, useEffect } from "react";
 import "../App.css";
 import GraficoDespesas from "../components/GraficoDespesas";
 import AcoesRapidas from "../components/AcoesRapidas";
 import UltimasTransacoes from "../components/UltimasTransacoes";
 import MetasFinanceiras from "../components/MetasFinanceiras";
+import { listarReceitas } from "../controllers/receitaController";
+import { listarDespesas } from "../controllers/despesaController";
 
 export default function Dashboard() {
+  const [receitas, setReceitas] = useState([]);
+  const [despesas, setDespesas] = useState([]);
+
+  const carregarReceitas = async () => {
+    try {
+      const todas = await listarReceitas();
+      setReceitas(todas);
+    } catch (err) {
+      console.error("Erro ao carregar receitas:", err);
+    }
+  };
+
+  const carregarDespesas = async () => {
+    try {
+      const todas = await listarDespesas();
+      setDespesas(todas);
+    } catch (err) {
+      console.error("Erro ao carregar despesas:", err);
+    }
+  };
+
+  useEffect(() => {
+    async function carregarDados() {
+      await carregarReceitas();
+      await carregarDespesas();
+    }
+
+    carregarDados();
+  }, []);
+
+  const converterMoedaParaNumero = (valor) => {
+    if (typeof valor === "number") return valor;
+    if (!valor) return 0;
+    return Number(
+      String(valor)
+        .replace("R$", "")
+        .replace(/\./g, "")
+        .replace(/,/g, ".")
+        .replace(/\s/g, "")
+        .trim()
+    ) || 0;
+  };
+
+  const formatarMoeda = (valor) =>
+    Number(valor).toLocaleString("pt-BR", {
+      style: "currency",
+      currency: "BRL",
+    });
+
+  const totalReceitas = receitas.reduce(
+    (acc, item) => acc + converterMoedaParaNumero(item.valor),
+    0
+  );
+
+  const totalDespesas = despesas.reduce(
+    (acc, item) => acc + converterMoedaParaNumero(item.valor),
+    0
+  );
+
+  const saldoAtual = totalReceitas - totalDespesas;
+
   return (
     // Container com padding ajustado para não comprimir o conteúdo
     <div
@@ -35,7 +99,9 @@ export default function Dashboard() {
                 >
                   Saldo Atual
                 </p>
-                <h4 className="text-success fw-bold mb-0">R$ 2.500,00</h4>
+                <h4 className="text-success fw-bold mb-0">
+                  {formatarMoeda(saldoAtual)}
+                </h4>
                 <small className="text-muted" style={{ fontSize: "12px" }}>
                   Disponível
                 </small>
@@ -63,7 +129,9 @@ export default function Dashboard() {
                 >
                   Receitas do mês
                 </p>
-                <h4 className="text-dark fw-bold mb-0">R$ 4.000,00</h4>
+                <h4 className="text-dark fw-bold mb-0">
+                  {formatarMoeda(totalReceitas)}
+                </h4>
                 <small className="text-muted" style={{ fontSize: "12px" }}>
                   Total de entradas
                 </small>
@@ -91,7 +159,9 @@ export default function Dashboard() {
                 >
                   Despesas do mês
                 </p>
-                <h4 className="text-dark fw-bold mb-0">R$ 1.500,00</h4>
+                <h4 className="text-dark fw-bold mb-0">
+                  {formatarMoeda(totalDespesas)}
+                </h4>
                 <small className="text-muted" style={{ fontSize: "12px" }}>
                   Total de saídas
                 </small>
@@ -110,7 +180,10 @@ export default function Dashboard() {
 
         <div className="col-md-4">
           <div className="card border-0 shadow-sm rounded-4 p-3 h-100">
-            <AcoesRapidas />
+            <AcoesRapidas
+              onSaveReceita={carregarReceitas}
+              onSaveDespesa={carregarDespesas}
+            />
           </div>
         </div>
       </div>

@@ -51,30 +51,21 @@
   ],
   "metas": [
     {
-      "id": "QYPzKDTv21A",
-      "titulo": "contrar job",
-      "valorMeta": "R$ 300,00",
-      "acumulado": "R$ 200,00",
-      "progresso": 67,
-      "prazo": "2026-06-10",
-      "cor": "#fa0000"
+      "id": "Byuq6fziRXQ",
+      "titulo": "Pagar o cloud",
+      "valorMeta": "R$ 150,00",
+      "acumulado": "R$ 210,00",
+      "progresso": 100,
+      "prazo": "2026-06-12",
+      "cor": "#db0000"
     },
     {
-      "id": "8B4qoT-mdOU",
-      "titulo": "monkeyzada",
-      "valorMeta": "R$ 6.000,00",
-      "acumulado": "R$ 100,00",
-      "progresso": 2,
-      "prazo": "2026-06-19",
-      "cor": "#2563eb"
-    },
-    {
-      "id": "8inryMARGe0",
-      "titulo": "teste",
-      "valorMeta": "R$ 200,00",
-      "acumulado": "R$ 100,00",
-      "progresso": 50,
-      "prazo": "2026-06-02",
+      "id": "EGEPi1TaM3c",
+      "titulo": "Urubu do pix",
+      "valorMeta": "R$ 1.000,00",
+      "acumulado": "R$ 900,00",
+      "progresso": 90,
+      "prazo": "2026-06-09",
       "cor": "#2563eb"
     }
   ],

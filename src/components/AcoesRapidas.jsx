@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ModalReceita from "./ModalReceita";
 import ModalDespesa from "./ModalDespesa";
 
-export default function AcoesRapidas() {
+export default function AcoesRapidas({ onSaveReceita, onSaveDespesa }) {
   const [showModalReceita, setShowModalReceita] = useState(false);
   const [showModalDespesa, setShowModalDespesa] = useState(false);
 
@@ -79,10 +79,12 @@ export default function AcoesRapidas() {
       <ModalReceita
         show={showModalReceita}
         handleClose={handleCloseModalReceita}
+        onSave={onSaveReceita}
       />
       <ModalDespesa
         show={showModalDespesa}
         handleClose={handleCloseModalDespesa}
+        onSave={onSaveDespesa}
       />
     </div>
   );

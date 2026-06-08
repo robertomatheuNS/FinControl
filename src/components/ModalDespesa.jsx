@@ -6,6 +6,7 @@ import { criarDespesa } from "../controllers/despesaController";
 export default function ModalDespesa({
   show,
   handleClose,
+  onSave,
 }) {
   const [descricao, setDescricao] = useState("");
   const [valorD, setValorD] = useState("");
@@ -53,6 +54,7 @@ export default function ModalDespesa({
       setFormaPagamento("");
       setNovaCategoria("");
 
+      if (onSave) await onSave();
       handleClose();
     } catch (error) {
       console.error(error);
