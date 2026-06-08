@@ -163,6 +163,15 @@
       "progresso": 90,
       "prazo": "2026-06-09",
       "cor": "#2563eb"
+    },
+    {
+      "id": "PMmu6XRz_LA",
+      "titulo": "vender maconha",
+      "valorMeta": "R$ 123,33",
+      "acumulado": "R$ 123,13",
+      "progresso": 100,
+      "prazo": "2026-06-24",
+      "cor": "#030811"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
