@@ -36,10 +36,21 @@
 
 .resumo-card {
   box-shadow: 0 12px 26px rgba(0, 0, 0, 0.08);
+  background-color: white;
 }
 
 .fontes-renda-card {
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.06);
+}
+
+.fonte-renda-item {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.fonte-renda-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.92);
 }
 
 .resumo-card:hover,
@@ -97,8 +108,26 @@
 }
 
 .visao-mensal:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* Apply lift effect to all cards and items inside Receitas page */
+.receitas-page .card,
+.receitas-page .resumo-card,
+.receitas-page .fontes-renda-card,
+.receitas-page .visao-mensal,
+.receitas-page .fonte-renda-item {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.receitas-page .card:hover,
+.receitas-page .resumo-card:hover,
+.receitas-page .fontes-renda-card:hover,
+.receitas-page .visao-mensal:hover,
+.receitas-page .fonte-renda-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.12);
 }
 
 .progress-bar {

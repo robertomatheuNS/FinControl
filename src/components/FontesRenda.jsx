@@ -39,9 +39,9 @@ export default function FontesRenda({ receitas = [] }) {
           <p className="text-muted">Nenhuma receita cadastrada.</p>
         ) : (
           top3.map((item, index) => (
-            <div key={item.nome}>
-              <p className="mb-1">{item.nome}</p>
-              <div className="progress mb-3">
+            <div key={item.nome} className="fonte-renda-item mb-3 p-3 rounded-3">
+              <p className="mb-1 fw-semibold">{item.nome}</p>
+              <div className="progress mb-0">
                 <div
                   className="progress-bar"
                   style={{
