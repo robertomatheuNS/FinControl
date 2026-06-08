@@ -12,21 +12,33 @@ export default function Metas() {
   const handleOpenModalMeta = () => setShowModalMeta(true);
   const handleCloseModalMeta = () => setShowModalMeta(false);
 
-  // Carregar metas da API JSON Server
-  useEffect(() => {
-    const carregarMetas = async () => {
-      try {
-        const todasMetas = await obterMetas();
-        setMetas(todasMetas);
+  // Função para carregar metas da API JSON Server
+  const carregarMetas = async () => {
+    try {
+      const todasMetas = await obterMetas();
+      setMetas(todasMetas);
 
-        const conquistas = await organizarMetas();
-        setProximasConquistas(conquistas);
-      } catch (err) {
-        console.error("Erro ao carregar metas:", err);
-      }
-    };
+      const conquistas = await organizarMetas();
+      setProximasConquistas(conquistas);
+    } catch (err) {
+      console.error("Erro ao carregar metas:", err);
+    }
+  };
+
+  // useEffect só chama a função assíncrona
+  useEffect(() => {
     carregarMetas();
   }, []);
+
+  // Atualiza a lista na hora que salva uma nova meta
+  const handleSaveMeta = async (novaMeta) => {
+    // adiciona no estado local
+    setMetas((prev) => [...prev, novaMeta]);
+
+    // recalcula próximas conquistas
+    const conquistas = await organizarMetas();
+    setProximasConquistas(conquistas);
+  };
 
   const chartData = proximasConquistas.map((item) => ({
     name: item.titulo,
@@ -193,7 +205,11 @@ export default function Metas() {
         </p>
       </div>
 
-      <ModalMeta show={showModalMeta} handleClose={handleCloseModalMeta} />
+      <ModalMeta
+        show={showModalMeta}
+        handleClose={handleCloseModalMeta}
+        onSave={handleSaveMeta} // atualiza na hora
+      />
     </div>
   );
 }

@@ -33,6 +33,16 @@
       "id": "r1HGt7q_yaY"
     }
   ],
-  "metas": [],
+  "metas": [
+    {
+      "id": "QYPzKDTv21A",
+      "titulo": "contrar job",
+      "valorMeta": "R$ 300,00",
+      "acumulado": "R$ 100,00",
+      "progresso": 33,
+      "prazo": "2026-06-10",
+      "cor": "#fa0000"
+    }
+  ],
   "$schema": "./node_modules/json-server/schema.json"
 }
