@@ -113,17 +113,6 @@ export default function UltimasTransacoes() {
           </tbody>
         </table>
       </div>
-
-      <div className="text-end mt-3">
-        <a
-          href="#"
-          className="text-success text-decoration-none fw-bold"
-          style={{ fontSize: "14px" }}
-        >
-          Ver todas as transações{" "}
-          <i className="bi bi-chevron-right" style={{ fontSize: "12px" }}></i>
-        </a>
-      </div>
     </div>
   );
 }

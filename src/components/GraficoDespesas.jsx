@@ -142,7 +142,6 @@ export default function GraficoDespesas({ despesas = [] }) {
           className="text-success text-decoration-none fw-bold"
           style={{ fontSize: "14px" }}
         >
-          Ver relatório completo
         </a>
       </div>
     </div>

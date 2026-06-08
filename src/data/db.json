@@ -135,6 +135,14 @@
       "categoria": "Lazer",
       "formaPagamento": "pix",
       "id": "jwYBz2cUIQ8"
+    },
+    {
+      "descricao": "caiu no chão",
+      "valor": "R$ 10,00",
+      "data": "2026-06-10",
+      "categoria": "azar",
+      "formaPagamento": "dinheiro",
+      "id": "klEJw9MdD3M"
     }
   ],
   "metas": [

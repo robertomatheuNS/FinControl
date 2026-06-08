@@ -57,18 +57,6 @@ export default function MetasFinanceiras() {
           <span className="text-muted fw-semibold">/ R$ 4.000,00</span>
         </span>
       </div>
-
-      {/* Link de Rodapé alinhado à direita */}
-      <div className="text-end mt-auto">
-        <a
-          href="#"
-          className="text-success text-decoration-none fw-bold"
-          style={{ fontSize: "14px" }}
-        >
-          Ver todas as metas{" "}
-          <i className="bi bi-chevron-right" style={{ fontSize: "12px" }}></i>
-        </a>
-      </div>
     </div>
   );
 }
