@@ -1,14 +1,11 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import "../styles/metas.css";
-import { obterMetas } from "../controllers/metaController";
-import { organizarMetas } from "../controllers/metaController";
-
+import { obterMetas, organizarMetas } from "../controllers/metaController";
 
 export default function Metas() {
-    const metas = obterMetas()
-
-    const proximasConquistas = organizarMetas()
+    const metas = obterMetas();
+    const proximasConquistas = organizarMetas();
 
     const chartData = proximasConquistas.map((item) => ({
         name: item.titulo,
@@ -27,7 +24,16 @@ export default function Metas() {
                     </p>
                 </div>
 
-                <button className="btn-nova-meta">+ Adicionar Nova Meta</button>
+                {/* BOTÕES LADO A LADO */}
+                <div className="d-flex gap-2">
+                    <button className="btn-nova-meta">
+                        + Adicionar Nova Meta
+                    </button>
+
+                    <button className="btn-nova-meta">
+                        + Adicionar valor a uma meta
+                    </button>
+                </div>
             </div>
 
             {/* RESUMO */}
@@ -77,7 +83,9 @@ export default function Metas() {
                                                 style={{ backgroundColor: item.cor }}
                                             />
                                             <div>
-                                                <p className="mb-1 fw-semibold">{item.titulo}</p>
+                                                <p className="mb-1 fw-semibold">
+                                                    {item.titulo}
+                                                </p>
                                                 <p
                                                     className="text-muted mb-0"
                                                     style={{ fontSize: "14px" }}
@@ -86,7 +94,9 @@ export default function Metas() {
                                                 </p>
                                             </div>
                                         </div>
-                                        <span className="fw-bold">{item.progresso}%</span>
+                                        <span className="fw-bold">
+                                            {item.progresso}%
+                                        </span>
                                     </div>
                                 ))}
                             </div>
@@ -108,7 +118,10 @@ export default function Metas() {
                                             stroke="none"
                                         >
                                             {chartData.map((entry, index) => (
-                                                <Cell key={`cell-${index}`} fill={entry.fill} />
+                                                <Cell
+                                                    key={`cell-${index}`}
+                                                    fill={entry.fill}
+                                                />
                                             ))}
                                         </Pie>
                                     </PieChart>
@@ -117,7 +130,9 @@ export default function Metas() {
                                 <div className="chart-center-badge">
                                     Próximas
                                     <br />
-                                    <span className="fw-bold">Conquistas</span>
+                                    <span className="fw-bold">
+                                        Conquistas
+                                    </span>
                                 </div>
                             </div>
                         </div>
@@ -131,8 +146,12 @@ export default function Metas() {
 
                 <div className="btn-group">
                     <button className="btn btn-light">Todas</button>
-                    <button className="btn btn-outline-secondary">Ativas</button>
-                    <button className="btn btn-outline-secondary">Concluídas</button>
+                    <button className="btn btn-outline-secondary">
+                        Ativas
+                    </button>
+                    <button className="btn btn-outline-secondary">
+                        Concluídas
+                    </button>
                 </div>
             </div>
 
@@ -143,9 +162,14 @@ export default function Metas() {
                             <div className="card-body">
                                 <h4 className="fw-bold">{meta.titulo}</h4>
 
-                                <h5 className="text-muted mb-3">({meta.valorMeta})</h5>
+                                <h5 className="text-muted mb-3">
+                                    ({meta.valorMeta})
+                                </h5>
 
-                                <div className="progress mb-3" style={{ height: "25px" }}>
+                                <div
+                                    className="progress mb-3"
+                                    style={{ height: "25px" }}
+                                >
                                     <div
                                         className="progress-bar"
                                         style={{
@@ -160,10 +184,14 @@ export default function Metas() {
                                     </div>
                                 </div>
 
-                                <p className="fw-bold">Acumulado: {meta.acumulado}</p>
+                                <p className="fw-bold">
+                                    Acumulado: {meta.acumulado}
+                                </p>
                                 <p>Prazo: {meta.prazo}</p>
 
-                                <button className="btn-meta w-100">Ver Detalhes</button>
+                                <button className="btn-meta w-100">
+                                    Ver Detalhes
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -173,8 +201,8 @@ export default function Metas() {
             {/* DICA */}
             <div className="text-center dica-meta">
                 <p className="fw-semibold">
-                    Dica: Crie uma meta secundária para lazer e viagens para manter o foco
-                    nas metas principais.
+                    Dica: Crie uma meta secundária para lazer e viagens para
+                    manter o foco nas metas principais.
                 </p>
             </div>
         </div>
