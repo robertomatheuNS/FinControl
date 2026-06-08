@@ -1,16 +1,4 @@
-import { useState } from "react";
-import ModalReceita from "./ModalReceita";
-import ModalDespesa from "./ModalDespesa";
-
-export default function AcoesRapidas({ onSaveReceita, onSaveDespesa }) {
-  const [showModalReceita, setShowModalReceita] = useState(false);
-  const [showModalDespesa, setShowModalDespesa] = useState(false);
-
-  const handleOpenModalReceita = () => setShowModalReceita(true);
-  const handleCloseModalReceita = () => setShowModalReceita(false);
-
-  const handleOpenModalDespesa = () => setShowModalDespesa(true);
-  const handleCloseModalDespesa = () => setShowModalDespesa(false);
+export default function AcoesRapidas({ onOpenReceita, onOpenDespesa }) {
 
   return (
     <div className="d-flex flex-column h-100">
@@ -19,7 +7,7 @@ export default function AcoesRapidas({ onSaveReceita, onSaveDespesa }) {
       <div
         className="card border rounded-3 p-3 mb-3 shadow-sm-hover quick-action-card"
         style={{ cursor: "pointer" }}
-        onClick={handleOpenModalReceita}
+        onClick={onOpenReceita}
       >
         <div className="d-flex align-items-center gap-3">
           <div
@@ -39,7 +27,7 @@ export default function AcoesRapidas({ onSaveReceita, onSaveDespesa }) {
       <div
         className="card border rounded-3 p-3 mb-3 quick-action-card"
         style={{ cursor: "pointer" }}
-        onClick={handleOpenModalDespesa}
+        onClick={onOpenDespesa}
       >
         <div className="d-flex align-items-center gap-3">
           <div
@@ -57,16 +45,6 @@ export default function AcoesRapidas({ onSaveReceita, onSaveDespesa }) {
         </div>
       </div>
 
-      <ModalReceita
-        show={showModalReceita}
-        handleClose={handleCloseModalReceita}
-        onSave={onSaveReceita}
-      />
-      <ModalDespesa
-        show={showModalDespesa}
-        handleClose={handleCloseModalDespesa}
-        onSave={onSaveDespesa}
-      />
     </div>
   );
 }

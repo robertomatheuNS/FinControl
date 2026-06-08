@@ -37,6 +37,22 @@
       "categoria": "Outros",
       "formaPagamento": "pix",
       "id": "5EMxYsmgH-g"
+    },
+    {
+      "descricao": "salario",
+      "valor": "R$ 1.000,00",
+      "data": "2026-06-08",
+      "categoria": "Salário",
+      "formaPagamento": "pix",
+      "id": "38M9_UfUvGM"
+    },
+    {
+      "descricao": "telecena",
+      "valor": "R$ 1.000,00",
+      "data": "2026-06-08",
+      "categoria": "Salário",
+      "formaPagamento": "pix",
+      "id": "p0Qlm7w6lmM"
     }
   ],
   "despesas": [
@@ -103,6 +119,22 @@
       "categoria": "Lazer",
       "formaPagamento": "debito",
       "id": "iBhQhlDWu-E"
+    },
+    {
+      "descricao": "fera",
+      "valor": "R$ 300,00",
+      "data": "2026-06-08",
+      "categoria": "Alimentação",
+      "formaPagamento": "pix",
+      "id": "mQWH6mWOg0E"
+    },
+    {
+      "descricao": "game",
+      "valor": "R$ 100,00",
+      "data": "2026-06-08",
+      "categoria": "Lazer",
+      "formaPagamento": "pix",
+      "id": "jwYBz2cUIQ8"
     }
   ],
   "metas": [
@@ -110,8 +142,8 @@
       "id": "Byuq6fziRXQ",
       "titulo": "Pagar o cloud",
       "valorMeta": "R$ 150,00",
-      "acumulado": "R$ 210,00",
-      "progresso": 100,
+      "acumulado": "R$ 10,00",
+      "progresso": 7,
       "prazo": "2026-06-12",
       "cor": "#db0000"
     },

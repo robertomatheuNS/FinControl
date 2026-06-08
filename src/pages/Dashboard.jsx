@@ -4,6 +4,8 @@ import GraficoDespesas from "../components/GraficoDespesas";
 import AcoesRapidas from "../components/AcoesRapidas";
 import UltimasTransacoes from "../components/UltimasTransacoes";
 import MetasFinanceiras from "../components/MetasFinanceiras";
+import ModalReceita from "../components/ModalReceita";
+import ModalDespesa from "../components/ModalDespesa";
 import {
   carregarReceitas,
   carregarDespesas,
@@ -16,17 +18,28 @@ import {
 export default function Dashboard() {
   const [receitas, setReceitas] = useState([]);
   const [despesas, setDespesas] = useState([]);
+  const [showModalReceita, setShowModalReceita] = useState(false);
+  const [showModalDespesa, setShowModalDespesa] = useState(false);
+
+  const handleOpenModalReceita = () => setShowModalReceita(true);
+  const handleCloseModalReceita = () => setShowModalReceita(false);
+  const handleOpenModalDespesa = () => setShowModalDespesa(true);
+  const handleCloseModalDespesa = () => setShowModalDespesa(false);
+
+  const carregarDashboard = async () => {
+    const todasReceitas = await carregarReceitas();
+    setReceitas(todasReceitas);
+
+    const todasDespesas = await carregarDespesas();
+    setDespesas(todasDespesas);
+  };
 
   useEffect(() => {
-    async function carregarDados() {
-      const todasReceitas = await carregarReceitas();
-      setReceitas(todasReceitas);
-
-      const todasDespesas = await carregarDespesas();
-      setDespesas(todasDespesas);
+    async function init() {
+      await carregarDashboard();
     }
 
-    carregarDados();
+    init();
   }, []);
 
   const totalReceitas = calcularTotalReceitas(receitas);
@@ -145,8 +158,8 @@ export default function Dashboard() {
         <div className="col-md-4">
           <div className="card border-0 shadow-sm rounded-4 p-3 h-100">
             <AcoesRapidas
-              onSaveReceita={carregarReceitas}
-              onSaveDespesa={carregarDespesas}
+              onOpenReceita={handleOpenModalReceita}
+              onOpenDespesa={handleOpenModalDespesa}
             />
           </div>
         </div>
@@ -165,6 +178,23 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <ModalReceita
+        show={showModalReceita}
+        handleClose={handleCloseModalReceita}
+        onSave={async () => {
+          await carregarDashboard();
+          handleCloseModalReceita();
+        }}
+      />
+      <ModalDespesa
+        show={showModalDespesa}
+        handleClose={handleCloseModalDespesa}
+        onSave={async () => {
+          await carregarDashboard();
+          handleCloseModalDespesa();
+        }}
+      />
     </div>
   );
 }
