@@ -1,91 +1,116 @@
-import React, { useState } from "react";
-import "../styles/receitas.css";
+import { useState } from "react";
+import { Card } from "../components/CardResumo";
+
+import GraficoReceitas from "../components/GraficoReceitas";
+import RecebimentosRecentes from "../components/RecebimentosRecentes";
+import FontesRenda from "../components/FontesRenda";
+import TabelaReceitas from "../components/TabelaReceitas";
 import ModalReceita from "../components/ModalReceita";
 
-const Receitas = () => {
+export default function Receitas() {
+const [showReceita, setShowReceita] = useState(false);
 
-    const [showModalReceita, setShowModalReceita] = useState(false);
-    const handleOpenModalReceita = () => setShowModalReceita(true);
-    const handleCloseModalReceita = () => setShowModalReceita(false);
+return ( <div className="container-fluid py-4">
 
-    const receitas = [
-        { data: "04/06/2024", descricao: "Salário", origem: "Salário", forma: "Pagamento", valor: 7500 },
-        { data: "03/06/2024", descricao: "Freelance 1", origem: "Freelance", forma: "Transferência", valor: 2200 },
-        { data: "02/06/2024", descricao: "Freelance 2", origem: "Freelance", forma: "Pix", valor: 1500 },
-    ];
+  <div className="d-flex justify-content-between align-items-center mb-4">
+    <div>
+      <h2 className="fw-bold">Receitas</h2>
+      <p className="text-muted">
+        Acompanhe todas as entradas
+      </p>
+    </div>
 
-    const total = receitas.reduce((acc, r) => acc + r.valor, 0);
+    <button
+      className="btn btn-danger"
+      onClick={() => setShowReceita(true)}
+    >
+      + Nova Receita
+    </button>
+  </div>
 
-    return (
-        <div className="receitas-container">
-            <header className="receitas-header">
-                <h2>Receitas</h2>
-                <button className="btn-nova" onClick={handleOpenModalReceita}>+ Nova Receita</button>
-            </header>
+  <Card className="shadow-sm border-0 p-4 mb-4">
 
-            <section className="resumo">
-                <div className="resumo-item">
-                    <h3>Total de Receitas do Mês</h3>
-                    <p className="valor-total">R$ {total.toLocaleString("pt-BR")}</p>
-                    <small>Este mês</small>
-                </div>
+    <h3 className="fw-bold mb-4">
+      Resumo de Receitas
+    </h3>
 
-                <div className="resumo-item">
-                    <h3>Visão Geral por Origem</h3>
-                    <div className="chart"></div>
-                    <p>Salário - 70%<br />Freelance - 15%<br />Investimentos - 10%<br />Outros - 5%</p>
-                </div>
+    <div className="row align-items-center">
 
-                <div className="resumo-item recebimentos">
-                    <h3>Recebimentos Recentes</h3>
-                    <ul>
-                        {receitas.map((r, i) => (
-                            <li key={i}>
-                                {r.descricao}: <strong>R$ {r.valor.toLocaleString("pt-BR")}</strong>
-                            </li>
-                        ))}
-                    </ul>
-                    <small>Período: Este mês 📅</small>
-                </div>
-            </section>
+      <div className="col-md-4 border-end">
+        <div className="d-flex align-items-center">
 
-            <section className="visao-mensal">
-                <h3>Visão Mensal de Entradas</h3>
-                <div className="progress-bar"><div className="progress salario">Salário - R$ 7.500,00</div></div>
-                <div className="progress-bar"><div className="progress freelance1">Freelance 1 - R$ 2.200,00</div></div>
-                <div className="progress-bar"><div className="progress freelance2">Freelance 2 - R$ 1.500,00</div></div>
-                <div className="progress-bar"><div className="progress outros">Outros - R$ 50,00</div></div>
+          <div
+            className="bg-success bg-opacity-10 rounded-circle d-flex align-items-center justify-content-center me-3"
+            style={{
+              width: "80px",
+              height: "80px"
+            }}
+          >
+            <i className="bi bi-graph-up-arrow text-success fs-1"></i>
+          </div>
 
-                <h3>Todas as Transações (Entradas)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Descrição</th>
-                            <th>Origem</th>
-                            <th>Forma</th>
-                            <th>Valor</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {receitas.map((r, i) => (
-                            <tr key={i}>
-                                <td>{r.data}</td>
-                                <td>{r.descricao}</td>
-                                <td><span className="origem">{r.origem}</span></td>
-                                <td>{r.forma}</td>
-                                <td>R$ {r.valor.toLocaleString("pt-BR")}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </section>
-            <ModalReceita
-                show={showModalReceita}
-                handleClose={handleCloseModalReceita}
-            />
+          <div>
+            <h5 className="fw-bold">
+              Total de Receitas do Mês
+            </h5>
+
+            <h1 className="text-success fw-bold">
+              R$ 7.500,00
+            </h1>
+
+            <p className="mb-0">
+              Este mês
+            </p>
+          </div>
+
         </div>
-    );
-};
+      </div>
 
-export default Receitas;
+      <div className="col-md-4 border-end">
+        <GraficoReceitas />
+      </div>
+
+      <div className="col-md-4">
+        <RecebimentosRecentes />
+      </div>
+
+    </div>
+
+  </Card>
+
+  <div className="d-flex justify-content-between align-items-center mb-3">
+
+    <h3 className="fw-bold">
+      Visão Mensal de Entradas
+    </h3>
+
+    <div className="d-flex align-items-center gap-2">
+      <span>Período</span>
+
+      <select className="form-select">
+        <option>Este mês</option>
+      </select>
+    </div>
+
+  </div>
+
+  <div className="row">
+
+    <div className="col-md-4">
+      <FontesRenda />
+    </div>
+
+    <div className="col-md-8">
+      <TabelaReceitas />
+    </div>
+
+  </div>
+
+  <ModalReceita
+    show={showReceita}
+    handleClose={() => setShowReceita(false)}
+  />
+</div>
+);
+}
+
