@@ -1,29 +1,14 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import "../styles/metas.css";
-import { metas } from "../models/metas"
+import { obterMetas } from "../controllers/metaController";
+import { organizarMetas } from "../controllers/metaController";
+
 
 export default function Metas() {
-    const proximasConquistas = [
-        {
-            titulo: "Viagem Fim de Ano",
-            progresso: 80,
-            cor: "#ef4444",
-            valorMeta: "R$ 10.000",
-        },
-        {
-            titulo: "Carro Novo",
-            progresso: 60,
-            cor: "#2563eb",
-            valorMeta: "R$ 50.000",
-        },
-        {
-            titulo: "Reserva de Emergência",
-            progresso: 30,
-            cor: "#f59e0b",
-            valorMeta: "R$ 10.000",
-        },
-    ];
+    const metas = obterMetas()
+
+    const proximasConquistas = organizarMetas()
 
     const chartData = proximasConquistas.map((item) => ({
         name: item.titulo,
