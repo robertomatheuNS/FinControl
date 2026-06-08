@@ -42,6 +42,24 @@
       "progresso": 67,
       "prazo": "2026-06-10",
       "cor": "#fa0000"
+    },
+    {
+      "id": "8B4qoT-mdOU",
+      "titulo": "monkeyzada",
+      "valorMeta": "R$ 6.000,00",
+      "acumulado": "R$ 1.100,00",
+      "progresso": 18,
+      "prazo": "2026-06-19",
+      "cor": "#2563eb"
+    },
+    {
+      "id": "8inryMARGe0",
+      "titulo": "teste",
+      "valorMeta": "R$ 200,00",
+      "acumulado": "R$ 100,00",
+      "progresso": 50,
+      "prazo": "2026-06-02",
+      "cor": "#2563eb"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"
