@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import InputMoeda from "./InputMoeda";
 import { criarReceita } from "../controllers/receitaController";
 
-export default function ModalReceita({ show, handleClose }) {
+export default function ModalReceita({ show, handleClose, onSave }) {
   const [descricao, setDescricao] = useState("");
   const [valorD, setValorD] = useState("");
   const [data, setData] = useState("");
@@ -30,20 +30,26 @@ export default function ModalReceita({ show, handleClose }) {
       const categoriaFinal =
         categoria === "nova" ? novaCategoria : categoria;
 
-      await criarReceita({
+      const novaReceita = {
         descricao,
         valor: valorD,
         data,
         categoria: categoriaFinal,
         formaPagamento,
-      });
+      };
 
+      await criarReceita(novaReceita);
+
+      // limpa campos
       setDescricao("");
       setValorD("");
       setData("");
       setCategoria("");
       setFormaPagamento("");
       setNovaCategoria("");
+
+      // chama onSave para atualizar lista em Receitas.jsx
+      if (onSave) await onSave();
 
       handleClose();
     } catch (error) {
@@ -100,7 +106,6 @@ export default function ModalReceita({ show, handleClose }) {
 
             {/* BODY */}
             <div className="modal-body">
-
               <input
                 type="text"
                 className="form-control mb-3"
@@ -170,7 +175,6 @@ export default function ModalReceita({ show, handleClose }) {
                 <option value="transferencia">Transferência</option>
                 <option value="dinheiro">Dinheiro</option>
               </select>
-
             </div>
 
             {/* FOOTER */}

@@ -21,6 +21,14 @@
       "categoria": "sorte",
       "formaPagamento": "dinheiro",
       "id": "UkY3egtXOYs"
+    },
+    {
+      "descricao": "Teste",
+      "valor": "R$ 5.000,00",
+      "data": "2026-06-08",
+      "categoria": "Salario",
+      "formaPagamento": "pix",
+      "id": "iF2-6CAwu7c"
     }
   ],
   "despesas": [
@@ -31,6 +39,14 @@
       "categoria": "Alimentação",
       "formaPagamento": "pix",
       "id": "r1HGt7q_yaY"
+    },
+    {
+      "descricao": "urubu do pix",
+      "valor": "R$ 100,00",
+      "data": "2026-06-08",
+      "categoria": "Outros",
+      "formaPagamento": "pix",
+      "id": "MQ3rZu8QsBM"
     }
   ],
   "metas": [
@@ -47,8 +63,8 @@
       "id": "8B4qoT-mdOU",
       "titulo": "monkeyzada",
       "valorMeta": "R$ 6.000,00",
-      "acumulado": "R$ 1.100,00",
-      "progresso": 18,
+      "acumulado": "R$ 100,00",
+      "progresso": 2,
       "prazo": "2026-06-19",
       "cor": "#2563eb"
     },
